@@ -1,35 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hot Sauce & Gifts Collective</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #0e0e0e;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      color: #ff5a1f;
-      letter-spacing: 1px;
-    }
-    p {
-      opacity: 0.85;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Sauce & Gifts | The Spicy Rebellion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* --- THE SYSTEM CORE --- */
+        :root {
+            --bg: #050505;
+            --neon-green: #00ff41;
+            --neon-red: #ff2a2a;
+            --neon-purple: #d600ff;
+            --holo-blue: #00f3ff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+            /* Matrix Grid Background */
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* --- HEADER & NEON SIGN --- */
+        header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 2px solid var(--neon-red);
+            background: rgba(0,0,0,0.8);
+        }
+
+        .neon-sign {
+            max-width: 100%;
+            width: 600px;
+            border: 3px solid var(--neon-red);
+            box-shadow: 0 0 25px var(--neon-red);
+            border-radius: 10px;
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-deck {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            background: #000;
+            flex-wrap: wrap; /* Keeps buttons nice on mobile */
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--holo-blue);
+            color: var(--holo-blue);
+            padding: 10px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--holo-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--holo-blue);
+        }
+
+        /* --- THE HOLO-BOARD (CONTENT) --- */
+        .holo-board {
+            max-width: 800px;
+            margin: 30px auto;
+            border: 2px solid var(--neon-green);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .board-title {
+            text-align: center;
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            border-bottom: 1px dashed var(--neon-green);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mission-text {
+            color: #ccc;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* --- KICKSTARTER / ACTION BUTTON --- */
+        .action-zone {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .kickstarter-btn {
+            background: var(--neon-green);
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 20px 40px;
+            text-decoration: none;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px var(--neon-green);
+            display: inline-block;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px var(--neon-green); }
+            50% { box-shadow: 0 0 30px var(--neon-green); }
+            100% { box-shadow: 0 0 10px var(--neon-green); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
-  <div>
-    <h1>🔥 Hot Sauce & Gifts Collective</h1>
-    <p>The Spicy Rebellion is live.</p>
-    <p>Bootleggers. Art. Heat. Humanity.</p>
-  </div>
+
+    <header>
+        <img src="https://via.placeholder.com/600x300/000000/ff0000?text=SPICY+REBELLION+NEON" class="neon-sign" alt="Spicy Rebellion Neon Sign">
+        <p style="color: var(--neon-red); margin-top: 10px; letter-spacing: 2px;">/// EST. 2026 ///</p>
+    </header>
+
+    <div class="nav-deck">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="sauce.html" class="nav-btn">Sauce Vault</a>
+        <a href="#" class="nav-btn">Rebel Gear</a>
+        <a href="#" class="nav-btn">The Lore</a>
+    </div>
+
+    <div class="holo-board">
+        <div class="board-title">/// CURRENT OBJECTIVE ///</div>
+        
+        <p class="mission-text">
+            Welcome to the Underground. We don't just sell sauce; we sell the truth. <br>
+            Explore the vault. Join the family. Feed the Rebellion.
+        </p>
+
+        <div class="action-zone">
+            <a href="https://www.kickstarter.com" class="kickstarter-btn">
+                LAUNCH KICKSTARTER 🚀
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        "Be Safe. Praise the Lord. Pass the Hot Sauce." <br>
+        THE SPICY REBELLION // CALVERTON, MD
+    </footer>
+
 </body>
 </html>
