@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,165 +6,207 @@
     <title>Hot Sauce & Gifts | The Spicy Rebellion</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        /* --- THE SYSTEM CORE --- */
         :root {
             --bg: #050505;
             --neon-green: #00ff41;
             --neon-red: #ff2a2a;
-            --neon-purple: #d600ff;
             --holo-blue: #00f3ff;
         }
-
         body {
             background-color: var(--bg);
             color: #fff;
             font-family: 'Share Tech Mono', monospace;
             margin: 0;
             padding: 0;
-            /* Matrix Grid Background */
+            /* Cyber Grid Background */
             background-image: 
-                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        /* --- HEADER & NEON SIGN --- */
-        header {
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
             text-align: center;
+        }
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .dashboard { padding: 15px; }
+            .brand-name { font-size: 2rem; }
+        }
+
+        header {
+            padding: 30px 10px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9), transparent);
+        }
+        .corp-name { color: #fff; font-size: 0.9rem; letter-spacing: 2px; opacity: 0.8; }
+        .brand-name { 
+            font-size: 2.5rem; 
+            color: #fff; 
+            text-shadow: 0 0 15px var(--neon-red);
+            margin: 5px 0 20px 0;
+            text-transform: uppercase;
+        }
+        
+        .dashboard {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
             padding: 20px;
-            border-bottom: 2px solid var(--neon-red);
-            background: rgba(0,0,0,0.8);
         }
 
-        .neon-sign {
-            max-width: 100%;
-            width: 600px;
-            border: 3px solid var(--neon-red);
-            box-shadow: 0 0 25px var(--neon-red);
-            border-radius: 10px;
-        }
-
-        /* --- NAVIGATION --- */
-        .nav-deck {
+        /* Top Buttons */
+        .command-deck {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            padding: 20px 0;
-            background: #000;
-            flex-wrap: wrap; /* Keeps buttons nice on mobile */
+            gap: 10px;
+            margin-bottom: 30px;
         }
-
-        .nav-btn {
-            background: transparent;
+        .cmd-btn {
+            background: rgba(0,0,0,0.6);
             border: 1px solid var(--holo-blue);
             color: var(--holo-blue);
-            padding: 10px 20px;
-            font-family: 'Share Tech Mono', monospace;
+            padding: 10px 15px;
             text-decoration: none;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
             transition: 0.3s;
+            flex: 1;
         }
-
-        .nav-btn:hover {
-            background: var(--holo-blue);
-            color: #000;
-            box-shadow: 0 0 15px var(--holo-blue);
-        }
-
-        /* --- THE HOLO-BOARD (CONTENT) --- */
-        .holo-board {
-            max-width: 800px;
-            margin: 30px auto;
-            border: 2px solid var(--neon-green);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            box-shadow: 0 0 10px var(--neon-green);
-        }
-
-        .board-title {
-            text-align: center;
+        .cmd-btn:hover { background: var(--holo-blue); color: #000; }
+        .cmd-btn.highlight {
+            border-color: var(--neon-green);
             color: var(--neon-green);
-            font-size: 1.5rem;
-            border-bottom: 1px dashed var(--neon-green);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
         }
 
-        .mission-text {
-            color: #ccc;
-            line-height: 1.6;
+        /* Tech Decoration Lines */
+        .tech-tree-lines {
+            height: 20px;
+            width: 80%;
+            margin: -20px auto 20px auto;
+            border-left: 2px solid var(--holo-blue);
+            border-right: 2px solid var(--holo-blue);
+            border-bottom: 2px solid var(--holo-blue);
+            opacity: 0.5;
+        }
+        .center-line {
+            width: 2px;
+            height: 20px;
+            background: var(--holo-blue);
+            margin: 0 auto;
+        }
+
+        /* The Cards Grid */
+        .drop-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .drop-card {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
             text-align: center;
-            margin-bottom: 20px;
+            transition: 0.3s;
+            cursor: pointer;
         }
-
-        /* --- KICKSTARTER / ACTION BUTTON --- */
-        .action-zone {
-            text-align: center;
-            margin: 40px 0;
+        .drop-card:hover { transform: scale(1.02); border-color: var(--neon-red); }
+        .card-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-bottom: 1px solid #333;
+            background-color: #000;
         }
-
-        .kickstarter-btn {
-            background: var(--neon-green);
-            color: #000;
-            font-size: 1.5rem;
-            font-weight: bold;
-            padding: 20px 40px;
-            text-decoration: none;
-            border: 2px solid #fff;
-            box-shadow: 0 0 20px var(--neon-green);
-            display: inline-block;
+        .card-label {
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #fff;
             text-transform: uppercase;
+        }
+        .card-sub { font-size: 0.7rem; color: #888; display: block; margin-top: 4px; }
+
+        /* The Big Rebel Fund Button */
+        .rebel-fund-banner {
+            margin-top: 30px;
+            background: linear-gradient(90deg, #000, #003300, #000);
+            border: 1px solid var(--neon-green);
+            padding: 15px;
+            color: var(--neon-green);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            letter-spacing: 1px;
             animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% { box-shadow: 0 0 5px var(--neon-green); } 50% { box-shadow: 0 0 20px var(--neon-green); } 100% { box-shadow: 0 0 5px var(--neon-green); } }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px var(--neon-green); }
-            50% { box-shadow: 0 0 30px var(--neon-green); }
-            100% { box-shadow: 0 0 10px var(--neon-green); }
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #555;
-            font-size: 0.8rem;
-        }
+        /* Footer */
+        .comms-deck { margin-top: 40px; display: flex; justify-content: center; gap: 20px; }
+        .social-link { color:#555; text-decoration:none; border:1px solid #333; padding:5px 10px; font-size: 0.8rem; }
+        .social-link:hover { border-color: var(--holo-blue); color: var(--holo-blue); }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="https://via.placeholder.com/600x300/000000/ff0000?text=SPICY+REBELLION+NEON" class="neon-sign" alt="Spicy Rebellion Neon Sign">
-        <p style="color: var(--neon-red); margin-top: 10px; letter-spacing: 2px;">/// EST. 2026 ///</p>
+        <div class="corp-name">HOT SAUCE AND GIFTS 🌶️🎁</div>
+        <div class="brand-name">SPICY REBELLION</div>
     </header>
 
-    <div class="nav-deck">
-        <a href="index.html" class="nav-btn">Home</a>
-        <a href="sauce.html" class="nav-btn">Sauce Vault</a>
-        <a href="#" class="nav-btn">Rebel Gear</a>
-        <a href="#" class="nav-btn">The Lore</a>
-    </div>
-
-    <div class="holo-board">
-        <div class="board-title">/// CURRENT OBJECTIVE ///</div>
+    <div class="dashboard">
         
-        <p class="mission-text">
-            Welcome to the Underground. We don't just sell sauce; we sell the truth. <br>
-            Explore the vault. Join the family. Feed the Rebellion.
-        </p>
-
-        <div class="action-zone">
-            <a href="https://www.kickstarter.com" class="kickstarter-btn">
-                LAUNCH KICKSTARTER 🚀
-            </a>
+        <div class="command-deck">
+            <a href="sauce.html" class="cmd-btn">Shop</a>
+            <a href="https://gofund.me/8711248e1" class="cmd-btn highlight">Fund</a>
+            <a href="#" class="cmd-btn">Join</a>
         </div>
-    </div>
 
-    <footer>
-        "Be Safe. Praise the Lord. Pass the Hot Sauce." <br>
-        THE SPICY REBELLION // CALVERTON, MD
-    </footer>
+        <div class="tech-tree-lines"></div>
+        <div class="center-line"></div>
+
+        <div class="drop-grid">
+            
+            <div class="drop-card" onclick="window.location.href='https://gofund.me/8711248e1'">
+                <img src="rebel-fund.jpg" class="card-img" alt="Rebel Fund" style="object-fit: contain;">
+                <div class="card-label">
+                    Priority One
+                    <span class="card-sub">Secure The Land</span>
+                </div>
+            </div>
+
+            <div class="drop-card" onclick="window.location.href='sauce.html'">
+                <img src="mug-graphic.jpg" class="card-img" alt="Rebel Mug" style="object-fit: contain;">
+                <div class="card-label">
+                    Supply Drop
+                    <span class="card-sub">Get The Gear</span>
+                </div>
+            </div>
+
+            <div class="drop-card" onclick="window.location.href='#'" style="grid-column: span 2;">
+                <img src="mission-feed.jpg" class="card-img" style="height: 180px; object-position: top;" alt="Feeding the People">
+                <div class="card-label">
+                    The Collective
+                    <span class="card-sub">"If we feed the people, we free the people."</span>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="https://gofund.me/8711248e1" class="rebel-fund-banner">
+            ✊🏿 JOIN THE REBEL FUND <br>
+            <span style="font-size:0.8rem; color:#fff; font-weight:normal;">Direct Action. Secure the Land.</span>
+        </a>
+
+        <div class="comms-deck">
+            <a href="https://facebook.com/HotSauceAndGiftsCollective" class="social-link">FACEBOOK</a>
+            <a href="https://x.com/SpicyRebellion" class="social-link">X / TWITTER</a>
+        </div>
+        
+        <br><br>
+        <div style="font-size:0.7rem; color:#444;">EST. 2026 // WASHINGTON DC</div>
+
+    </div>
 
 </body>
 </html>
