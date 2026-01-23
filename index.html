@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE SPICY REBELLION | DC</title>
+    <style>
+        /* --- CYBERPUNK CORE STYLES --- */
+        :root {
+            --neon-green: #39ff14;
+            --neon-red: #ff073a;
+            --neon-orange: #ffaa00;
+            --void-black: #050505;
+            --terminal-gray: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--void-black);
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace; /* Hacker Font */
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 2px solid var(--terminal-gray);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--neon-red);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            text-shadow: 0 0 10px rgba(255, 7, 58, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: var(--neon-orange);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* --- THE GRID (PRODUCT CARDS) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--terminal-gray);
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+        }
+
+        .card-img {
+            width: 100%;
+            height: auto; /* Maintains aspect ratio */
+            border-bottom: 2px solid var(--void-black);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 {
+            color: var(--neon-green);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card p {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--terminal-gray);
+            color: #666;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>The Hot Sauce & Gifts Collective</h1>
+            <p class="tagline">// SPICY REBELLION // FEED THE BLOCK //</p>
+        </header>
+
+        <div class="grid">
+
+            <div class="card">
+                <img src="rebel-fund.jpg" alt="Secure The Land" class="card-img">
+                <h3>PRIORITY ONE</h3>
+                <p>SECURE THE LAND</p>
+            </div>
+
+            <div class="card">
+                <img src="mug-graphic.jpg" alt="Rebel Mug" class="card-img">
+                <h3>SUPPLY DROP</h3>
+                <p>GET THE GEAR</p>
+            </div>
+
+            <div class="card">
+                <img src="mission-feed.jpg" alt="Feeding the People" class="card-img">
+                <h3>THE COLLECTIVE</h3>
+                <p>"IF WE FEED THE PEOPLE, WE FREE THE PEOPLE."</p>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>EST. 2026 // WASHINGTON D.C. // END TRANSMISSION</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
