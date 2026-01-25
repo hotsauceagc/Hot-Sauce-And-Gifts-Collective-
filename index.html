@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE SPICY REBELLION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE SYSTEM COLORS --- */
+        :root {
+            --bg-color: #050505;
+            --neon-green: #00ff41;
+            --neon-red: #ff2a2a;
+            --holo-blue: #00f3ff;
+            --text-chrome: #e0e0e0;
+        }
+
+        /* --- RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* --- BODY STYLES --- */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-chrome);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 20px;
+            /* Static Grid Background */
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- HEADER --- */
+        header {
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 20px;
+        }
+
+        .sub-header {
+            color: var(--neon-red);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            margin: 0;
+        }
+
+        /* --- BUTTONS --- */
+        .command-deck {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap; 
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--holo-blue);
+            color: var(--holo-blue);
+            padding: 12px 25px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: 0.3s;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--holo-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--holo-blue);
+        }
+
+        .btn-urgent {
+            border-color: var(--neon-red);
+            color: var(--neon-red);
+        }
+
+        .btn-urgent:hover {
+            background: var(--neon-red);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-red);
+        }
+        
+        /* New Lore Button Style */
+        .btn-lore {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+        .btn-lore:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* --- CARD GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid #333;
+            padding: 15px;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            border-color: var(--neon-green);
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain; 
+            background: #000;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        
+        .card-img.cover {
+            object-fit: cover;
+        }
+
+        .card h3 {
+            color: var(--neon-green);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        /* Small action buttons inside cards */
+        .card-actions {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mini-btn {
+            font-size: 0.75rem;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid #555;
+            background: #111;
+            text-transform: uppercase;
+        }
+        .mini-btn:hover {
+            border-color: var(--holo-blue);
+            color: var(--holo-blue);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="sub-header">// HOT SAUCE AND GIFTS COLLECTIVE //</div>
+            <h1>SPICY REBELLION</h1>
+        </header>
+
+        <div class="command-deck">
+            <a href="sauce.html" class="btn">[ SHOP ]</a>
+            <a href="https://gofund.me/8711248e1" class="btn btn-urgent">[ FUND ]</a>
+            <a href="lore.html" class="btn btn-lore">[ THE LORE ]</a>
+        </div>
+
+        <div class="grid">
+
+            <div class="card" onclick="window.location.href='https://gofund.me/8711248e1'" style="cursor:pointer;">
+                <img src="rebel-fund.jpg" class="card-img" alt="Rebel Fund">
+                <div>
+                    <h3>REBEL FUND</h3>
+                    <p>PRIORITY ONE: SECURE THE LAND</p>
+                </div>
+                <div class="card-actions">
+                     <span class="mini-btn" style="border-color:var(--neon-red); color:var(--neon-red);">DONATE NOW</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="mug-graphic.jpg" class="card-img" alt="Mug">
+                <div>
+                    <h3>SUPPLY DROP</h3>
+                    <p>OFFICIAL GEAR & LEGACY HEAT</p>
+                </div>
+                <div class="card-actions">
+                    <a href="sauce.html" class="mini-btn">MUG</a>
+                    <a href="https://www.walmart.com/search?q=tabasco+sauce" target="_blank" class="mini-btn">TABASCO</a>
+                    <a href="https://www.walmart.com/search?q=crystal+hot+sauce" target="_blank" class="mini-btn">CRYSTAL</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="mission-feed.jpg" class="card-img cover" alt="Mission">
+                <div>
+                    <h3>THE COLLECTIVE</h3>
+                    <p>FEED THE BLOCK. BAGS FROM $0.89</p>
+                </div>
+                <div class="card-actions">
+                    <a href="https://www.walmart.com/search?q=bulk+rice" target="_blank" class="mini-btn">[ RICE ]</a>
+                    <a href="https://www.walmart.com/search?q=great+value+dry+beans" target="_blank" class="mini-btn">[ BEANS ]</a>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            EST. 2026 // WASHINGTON D.C. // END TRANSMISSION
+        </footer>
+
+    </div>
+
+</body>
+</html>
