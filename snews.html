@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNEWS // SPICY WIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- TACTICAL COLOR PALETTE --- */
+        :root {
+            --bg-dark: #050a14;
+            --term-green: #00ff41;
+            --data-blue: #00cbff;
+            --alert-orange: #ff9900;
+            --critical-red: #ff2a2a;
+            --text-gray: #aec2d3;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-gray);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 20px;
+            /* Digital Circuit Background */
+            background-image: 
+                linear-gradient(rgba(0, 203, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 203, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            margin-bottom: 80px; /* Space for ticker */
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-deck {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--data-blue);
+            padding-bottom: 15px;
+        }
+        .home-btn {
+            background: #001a33;
+            border: 1px solid var(--data-blue);
+            color: var(--data-blue);
+            padding: 8px 15px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+        .home-btn:hover {
+            background: var(--data-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--data-blue);
+        }
+        .status-indicator {
+            color: var(--term-green);
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0.5; } }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 3.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+            /* Glitchy Text Effect */
+            text-shadow: 2px 0 var(--data-blue), -2px 0 var(--critical-red);
+            letter-spacing: -2px;
+        }
+        .sub-header {
+            color: var(--alert-orange);
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* --- NEWS FEED --- */
+        .news-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .news-item {
+            background: rgba(5, 10, 20, 0.8);
+            border-left: 5px solid var(--data-blue);
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Color coding for different types of news */
+        .news-item.alert { border-color: var(--alert-orange); }
+        .news-item.critical { border-color: var(--critical-red); }
+
+        .dateline {
+            font-size: 0.8rem;
+            color: var(--data-blue);
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .news-item.alert .dateline { color: var(--alert-orange); }
+        .news-item.critical .dateline { color: var(--critical-red); }
+
+        .headline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .body-text {
+            line-height: 1.5;
+            font-size: 1.1rem;
+        }
+
+        /* --- TICKER TAPE FOOTER --- */
+        .ticker-wrap {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-left: 100%; /* Push text offscreen */
+            border-top: 2px solid var(--critical-red);
+            box-shadow: 0 0 20px rgba(255, 42, 42, 0.3);
+        }
+
+        .ticker {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            white-space: nowrap;
+            padding-right: 100%; /* Ensure seamless loop */
+            animation: ticker 30s linear infinite;
+            color: var(--critical-red);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+        .ticker-item {
+            margin: 0 20px;
+        }
+        .ticker-item::after { content: " /// "; color: #555;}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="nav-deck">
+            <a href="index.html" class="home-btn">[ < OFFENSIVE ]</a>
+            <div class="status-indicator">⚡ SIGNAL STATUS: ENCRYPTED // LIVE ⚡</div>
+        </div>
+
+        <header>
+            <h1>SNEWS NETWORK</h1>
+            <div class="sub-header">SATIRE // POLITICAL // UNFILTERED WIRE</div>
+        </header>
+
+        <div class="news-feed">
+
+            <div class="news-item critical">
+                <span class="dateline">DATELINE: CITY HALL // TIME: 0900</span>
+                <div class="headline">MAYOR DECLARES 'MILD SAUCE' MANDATORY FOR ALL SCHOOL LUNCHES</div>
+                <div class="body-text">
+                    <p>In a controversial move today, the Mayor signed the "Bland Act," outlawing any condiment hotter than ketchup in city schools. "Spice leads to independent thought," the Mayor stated from behind a podium fortified with mayonnaise packets. Protestors have already begun smuggling single-serve Cholula packets into cafeterias. Stay spicy, kids.</p>
+                </div>
+            </div>
+
+            <div class="news-item alert">
+                <span class="dateline">DATELINE: UNDERGROUND SECTOR 4 // TIME: 0330</span>
+                <div class="headline">"BOOTLEG FLAVOR" PIPELINE DISCOVERED BENEATH FINANCIAL DISTRICT</div>
+                <div class="body-text">
+                    <p>Authorities uncovered a sophisticated network of PVC pipes delivering high-grade hot sauce directly to the kitchens of high-end restaurants, bypassing city flavor taxes. The operation, dubbed "The spicy vein," is suspected to be run by local operative Shannon "Too Hot." No arrests have been made as agents were too busy dipping chips into the evidence.</p>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <span class="dateline">DATELINE: REBEL SCIENCE DIVISION // TIME: 1400</span>
+                <div class="headline">STUDY CONFIRMS: EATING UNSEASONED CHICKEN CAUSES SUBMISSION</div>
+                <div class="body-text">
+                    <p>A new report from the collective's science team suggests a direct link between bland diets and corporate obedience. "The lack of flavor numbs the soul," said lead researcher Dr. Pepper (no relation). The report suggests one drop of habanero oil a day can reverse the effects and induce a sudden urge to unionize.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="ticker-item">BREAKING: CITY FLAVOR SUPPLY REACHES CRITICAL LOW</span>
+            <span class="ticker-item">ALERT: MAYOR SEEN EATING PLAIN BOILED POTATO, PUBLIC HORRIFIED</span>
+            <span class="ticker-item">UPDATE: CYNTHIA FIRE DECLARED "PUBLIC ENEMY #1" BY RESTAURANT ASSOCIATION</span>
+            <span class="ticker-item">REMINDER: MILD SAUCE IS A TOOL OF THE OPPENSOR</span>
+        </div>
+    </div>
+
+</body>
+</html>
