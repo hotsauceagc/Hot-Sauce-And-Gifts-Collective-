@@ -20,50 +20,46 @@
         /* --- RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* --- BODY STYLES (WATERMARK ACTIVATED) --- */
+        /* --- BODY STYLES --- */
         body {
             background-color: var(--bg-color);
             color: var(--text-chrome);
             font-family: 'Share Tech Mono', monospace;
             padding: 20px;
-            
-            /* LAYERED BACKGROUND:
-               1. The Cyber Grid (Top Layer)
-               2. The Watermark Logo (Bottom Layer) -> logowatermark.jpg
-            */
+            /* Just the Cyber Grid here */
             background-image: 
                 linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px),
-                url('logowatermark.jpg'); /* <-- YOUR LOGO FILE */
-            
-            /* Grid repeats, Logo stays centered and does NOT repeat */
-            background-repeat: repeat, repeat, no-repeat;
-            
-            /* Logo locked in dead center */
-            background-position: 0 0, 0 0, center center;
-            
-            /* Logo stays fixed when you scroll */
-            background-attachment: scroll, scroll, fixed;
-            
-            /* Grid size vs Logo size */
-            background-size: 30px 30px, 30px 30px, 500px auto; 
-            
-            /* Blending to help the JPG fade into the dark background */
-            background-blend-mode: normal, normal, overlay;
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+            position: relative; /* Needed for z-index context */
+        }
+
+        /* --- THE FORCED WATERMARK --- */
+        .watermark-layer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; /* Adjust size of logo here */
+            max-width: 600px;
+            opacity: 0.2; /* Transparency: 0.1 is faint, 1.0 is full */
+            z-index: -1; /* Pushes it BEHIND everything */
+            pointer-events: none; /* Lets you click through it */
+            filter: grayscale(100%); /* Optional: makes it black/white */
         }
 
         /* --- CONTAINER --- */
-        /* Darker background here ensures text is readable over the logo */
         .container {
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
-            background: rgba(5, 5, 5, 0.85); /* 85% opacity black */
+            /* Slight dark backing to make text readable over logo */
+            background: rgba(5, 5, 5, 0.6); 
             padding: 20px;
             border: 1px solid #333;
             box-shadow: 0 0 50px rgba(0,0,0,0.9);
-            position: relative;
-            z-index: 10;
+            backdrop-filter: blur(2px); /* Blurs the logo slightly behind text */
         }
 
         /* --- HEADER --- */
@@ -220,6 +216,8 @@
 </head>
 <body>
 
+    <img src="logowatermark.jpg" class="watermark-layer" alt="Background Logo">
+
     <div class="container">
         
         <header>
@@ -229,7 +227,6 @@
 
         <div class="command-deck">
             <a href="https://whatchuthink.redbubble.com" target="_blank" class="btn">[ SHOP ]</a>
-            
             <a href="https://gofund.me/8711248e1" class="btn btn-urgent">[ FUND ]</a>
             <a href="lore.html" class="btn btn-lore">[ THE LORE ]</a>
         </div>
@@ -255,7 +252,6 @@
                 </div>
                 <div class="card-actions">
                     <a href="https://www.redbubble.com/i/mug/Rebels-vs-The-Empire-by-whatchuthink/176371034.9Q0AD" target="_blank" class="mini-btn">MUG</a>
-                    
                     <a href="https://www.walmart.com/search?q=tabasco+sauce" target="_blank" class="mini-btn">TABASCO</a>
                     <a href="https://www.walmart.com/search?q=crystal+hot+sauce" target="_blank" class="mini-btn">CRYSTAL</a>
                 </div>
