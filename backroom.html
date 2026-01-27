@@ -720,3 +720,67 @@
     </script>
 </body>
 </html>
+navigator.clipboard.writeText(text).then(() => {
+                addSystemMessage(`Link copied to clipboard: "${p.title}"`);
+            }).catch(err => {
+                addSystemMessage("Error copying link. Manual copy required.");
+            });
+        }
+
+        // Chat Logic: Post Message
+        function postMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            const list = document.getElementById('messageList');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message';
+            // Highlights 'You' in Green to show active user
+            msgDiv.innerHTML = `
+                <div class="message-header">
+                    <span class="message-author" style="color: var(--neon-green)">Commander (You)</span>
+                    <span class="message-time">${timeString}</span>
+                </div>
+                <div class="message-body">${text}</div>
+            `;
+
+            list.appendChild(msgDiv);
+            input.value = '';
+            
+            // Auto-scroll to bottom
+            list.scrollTop = list.scrollHeight;
+        }
+
+        // Helper: System Notifications in Chat
+        function addSystemMessage(text) {
+            const list = document.getElementById('messageList');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message';
+            msgDiv.style.opacity = '0.7';
+            msgDiv.innerHTML = `
+                <div class="message-header">
+                    <span class="message-author" style="color: var(--amber)">[SYSTEM]</span>
+                </div>
+                <div class="message-body" style="font-family: 'Share Tech Mono'; font-size: 0.8rem;">${text}</div>
+            `;
+            list.appendChild(msgDiv);
+            list.scrollTop = list.scrollHeight;
+        }
+
+        // Event Listener: Press Enter to Send
+        document.getElementById('messageInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                postMessage();
+            }
+        });
+
+        // Initialize the Board
+        renderProposals();
+    </script>
+</body>
+</html>
