@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPICY REBELLION | Hot Sauce & Gifts Collective</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================
+   CORE VARIABLES - NEON OVERDRIVE
+=========================== */
+:root{
+    --bg:#020204;
+    --green:#00ff41;
+    --red:#ff2a2a;
+    --blue:#00f3ff;
+    --purple:#bd00ff;
+    --pink:#ff00ff;
+    --yellow:#ffff00;
+    --chrome:#e0e0e0;
+    --dark:#0a0a0f;
+}
+
+/* ===========================
+   GLOBAL RESET & GLITCH BASE
+=========================== */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background:var(--bg);
+    font-family:'Share Tech Mono',monospace;
+    color:var(--chrome);
+    overflow-x:hidden;
+    position:relative;
+    min-height:100vh;
+}
+
+/* Animated cyberpunk grid background */
+body::before{
+    content:'';
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    background-image:
+        linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
+    background-size:50px 50px;
+    z-index:0;
+    animation:gridMove 20s linear infinite;
+}
+
+@keyframes gridMove{
+    0%{transform:perspective(500px) rotateX(60deg) translateY(0);}
+    100%{transform:perspective(500px) rotateX(60deg) translateY(50px);}
+}
+
+/* Dark overlay with scanlines */
+.overlay{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+    z-index:1;
+    pointer-events:none;
+}
+
+.overlay::after{
+    content:'';
+    position:absolute;
+    top:0;left:0;width:100%;height:100%;
+    background:repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.15),
+        rgba(0,0,0,0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events:none;
+    animation:scanlines 8s linear infinite;
+}
+
+@keyframes scanlines{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(10px);}
+}
+
+/* ===========================
+   VIDEO BACKGROUND CONTAINER
+=========================== */
+.video-container{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    z-index:0;
+    overflow:hidden;
+}
+
+.video-container video{
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    height:auto;
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    opacity:0.3;
+    filter:contrast(1.2) saturate(1.5) hue-rotate(180deg);
+    mix-blend-mode:screen;
+}
+
+/* ===========================
+   AUDIO PLAYER STYLES
+=========================== */
+.audio-player{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:100;
+    background:rgba(0,0,0,0.9);
+    border:1px solid var(--green);
+    padding:15px;
+    border-radius:5px;
+    box-shadow:0 0 20px rgba(0,255,65,0.3);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    backdrop-filter:blur(10px);
+}
+
+.audio-player button{
+    background:transparent;
+    border:1px solid var(--green);
+    color:var(--green);
+    padding:8px 15px;
+    cursor:pointer;
+    font-family:'Share Tech Mono',monospace;
+    text-transform:uppercase;
+    transition:all 0.3s;
+}
+
+.audio-player button:hover{
+    background:var(--green);
+    color:var(--bg);
+    box-shadow:0 0 15px var(--green);
+}
+
+.audio-visualizer{
+    display:flex;
+    gap:3px;
+    height:30px;
+    align-items:flex-end;
+}
+
+.bar{
+    width:4px;
+    background:var(--green);
+    animation:soundBars 0.5s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(2){animation-delay:0.1s;height:60%;}
+.bar:nth-child(3){animation-delay:0.2s;height:80%;}
+.bar:nth-child(4){animation-delay:0.3s;height:40%;}
+.bar:nth-child(5){animation-delay:0.4s;height:70%;}
+
+@keyframes soundBars{
+    0%{height:20%;opacity:0.5;}
+    100%{height:100%;opacity:1;}
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+.container{
+    position:relative;
+    z-index:10;
+    max-width:1200px;
+    margin:auto;
+    text-align:center;
+    padding:20px;
+}
+
+/* ===========================
+   HEADER - GLITCH EDITION
+=========================== */
+header{
+    border-bottom:2px solid var(--green);
+    margin-bottom:40px;
+    padding-bottom:30px;
+    position:relative;
+    animation:glowPulse 3s infinite alternate;
+}
+
+header::before{
+    content:'';
+    position:absolute;
+    top:-10px;left:-10px;right:-10px;bottom:-10px;
+    background:linear-gradient(45deg,var(--green),var(--blue),var(--purple),var(--red));
+    z-index:-1;
+    filter:blur(20px);
+    opacity:0.3;
+    animation:glowRotate 10s linear infinite;
+}
+
+@keyframes glowRotate{
+    0%{filter:blur(20px) hue-rotate(0deg);}
+    100%{filter:blur(20px) hue-rotate(360deg);}
+}
+
+@keyframes glowPulse{
+    0%{box-shadow:0 0 5px var(--green), inset 0 0 10px rgba(0,255,65,0.1);}
+    100%{box-shadow:0 0 40px var(--green), inset 0 0 20px rgba(0,255,65,0.2);}
+}
+
+.sub{
+    color:var(--red);
+    letter-spacing:4px;
+    font-size:0.9rem;
+    margin-bottom:15px;
+    text-transform:uppercase;
+    animation:textFlicker 2s infinite;
+    text-shadow:0 0 10px var(--red);
+}
+
+@keyframes textFlicker{
+    0%,100%{opacity:1;}
+    50%{opacity:0.8;}
+    52%{opacity:0.3;}
+    54%{opacity:1;}
+}
+
+.title-zone{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+    position:relative;
+}
+
+.logo{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    border:3px solid var(--red);
+    box-shadow:0 0 30px var(--red), inset 0 0 20px rgba(255,42,42,0.3);
+    animation:spinSlow 10s linear infinite, glitchBorder 3s infinite;
+    position:relative;
+}
+
+@keyframes glitchBorder{
+    0%,90%,100%{border-color:var(--red);}
+    91%{border-color:var(--blue);}
+    92%{border-color:var(--green);}
+    93%{border-color:var(--red);}
+}
+
+@keyframes spinSlow{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+h1{
+    font-family:'Orbitron',sans-serif;
+    color:var(--green);
+    font-size:4rem;
+    font-weight:900;
+    text-transform:uppercase;
+    position:relative;
+    text-shadow:
+        0 0 10px rgba(0,255,65,0.8),
+        0 0 20px rgba(0,255,65,0.5),
+        0 0 40px rgba(0,255,65,0.3);
+    animation:titleFlicker 4s infinite, glitchText 5s infinite;
+}
+
+h1::before,
+h1::after{
+    content:'SPICY REBELLION';
+    position:absolute;
+    top:0;left:0;width:100%;height:100%;
+}
+
+h1::before{
+    color:var(--blue);
+    z-index:-1;
+    animation:glitch1 3s infinite;
+    clip-path:polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+h1::after{
+    color:var(--red);
+    z-index:-2;
+    animation:glitch2 3s infinite;
+    clip-path:polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch1{
+    0%,90%,100%{transform:translate(0);}
+    91%{transform:translate(-3px,0);}
+    92%{transform:translate(3px,0);}
+    93%{transform:translate(0);}
+}
+
+@keyframes glitch2{
+    0%,90%,100%{transform:translate(0);}
+    91%{transform:translate(3px,0);}
+    92%{transform:translate(-3px,0);}
+    93%{transform:translate(0);}
+}
+
+@keyframes titleFlicker{
+    0%,100%{opacity:1;}
+    45%{opacity:0.9;}
+    48%{opacity:0.3;}
+    50%{opacity:1;}
+    52%{opacity:0.8;}
+    54%{opacity:1;}
+}
+
+/* ===========================
+   BUTTONS - NEON GLOW
+=========================== */
+.command{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+    margin:40px 0;
+}
+
+.btn{
+    padding:15px 30px;
+    border:2px solid;
+    color:var(--chrome);
+    text-decoration:none;
+    background:rgba(0,0,0,0.7);
+    transition:all 0.3s;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:bold;
+    position:relative;
+    overflow:hidden;
+    clip-path:polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.btn::before{
+    content:'';
+    position:absolute;
+    top:0;left:-100%;
+    width:100%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    transition:left 0.5s;
+}
+
+.btn:hover::before{
+    left:100%;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+.lore{border-color:var(--green);color:var(--green);}
+.lore:hover{background:var(--green);color:var(--bg);box-shadow:0 0 30px var(--green);}
+
+.shameless{border-color:var(--purple);color:var(--purple);}
+.shameless:hover{background:var(--purple);color:var(--bg);box-shadow:0 0 30px var(--purple);}
+
+.urgent{border-color:var(--red);color:var(--red);animation:urgentPulse 2s infinite;}
+.urgent:hover{background:var(--red);color:var(--bg);box-shadow:0 0 30px var(--red);}
+
+@keyframes urgentPulse{
+    0%,100%{box-shadow:0 0 5px var(--red);}
+    50%{box-shadow:0 0 20px var(--red), 0 0 40px var(--red);}
+}
+
+/* ===========================
+   GRID CARDS - HOLOGRAPHIC
+=========================== */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(20,20,30,0.9);
+    padding:20px;
+    transition:all 0.4s;
+    border:1px solid rgba(0,255,65,0.2);
+    position:relative;
+    overflow:hidden;
+    backdrop-filter:blur(10px);
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--green),transparent);
+    transform:translateX(-100%);
+    transition:transform 0.6s;
+}
+
+.card:hover::before{
+    transform:translateX(100%);
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+    border:1px solid var(--green);
+    box-shadow:
+        0 0 30px rgba(0,255,65,0.3),
+        inset 0 0 30px rgba(0,255,65,0.1);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    margin-bottom:15px;
+    border:1px solid rgba(0,255,65,0.3);
+    filter:contrast(1.1) saturate(1.2);
+    transition:all 0.3s;
+}
+
+.card:hover img{
+    filter:contrast(1.2) saturate(1.5) brightness(1.1);
+}
+
+.card h3{
+    color:var(--green);
+    font-family:'Orbitron',sans-serif;
+    margin-bottom:10px;
+    font-size:1.3rem;
+    text-shadow:0 0 10px rgba(0,255,65,0.5);
+}
+
+.card p{
+    color:#aaa;
+    font-size:0.9rem;
+    line-height:1.5;
+}
+
+/* ===========================
+   NEON BUTTERFLIES - ULTIMATE EDITION
+=========================== */
+.butterfly-container{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    pointer-events:none;
+    z-index:50;
+    overflow:hidden;
+}
+
+.butterfly{
+    position:absolute;
+    width:40px;
+    height:40px;
+    pointer-events:none;
+    filter:drop-shadow(0 0 10px currentColor);
+}
+
+.butterfly-wing{
+    position:absolute;
+    width:20px;
+    height:30px;
+    background:currentColor;
+    opacity:0.8;
+    border-radius:50% 10% 50% 10%;
+    animation:wingFlap 0.2s infinite alternate;
+}
+
+.butterfly-wing.left{
+    left:0;
+    transform-origin:right center;
+    transform:rotate(-20deg);
+}
+
+.butterfly-wing.right{
+    right:0;
+    transform-origin:left center;
+    transform:rotate(20deg) scaleX(-1);
+}
+
+.butterfly-body{
+    position:absolute;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:4px;
+    height:25px;
+    background:currentColor;
+    border-radius:2px;
+    z-index:1;
+}
+
+@keyframes wingFlap{
+    0%{transform:rotateY(0deg);}
+    100%{transform:rotateY(60deg);}
+}
+
+/* Butterfly flight paths */
+.bf1{top:10%;left:-50px;color:var(--pink);animation:flyPath1 15s linear infinite;}
+.bf2{top:30%;left:-50px;color:var(--blue);animation:flyPath2 18s linear infinite 2s;}
+.bf3{top:60%;left:-50px;color:var(--green);animation:flyPath3 20s linear infinite 4s;}
+.bf4{top:80%;left:-50px;color:var(--purple);animation:flyPath4 16s linear infinite 1s;}
+.bf5{top:20%;right:-50px;color:var(--yellow);animation:flyPath5 17s linear infinite 3s;}
+.bf6{top:50%;right:-50px;color:var(--red);animation:flyPath6 19s linear infinite 5s;}
+
+@keyframes flyPath1{
+    0%{transform:translate(0,0) rotate(0deg);}
+    25%{transform:translate(30vw,-20vh) rotate(45deg);}
+    50%{transform:translate(60vw,10vh) rotate(-20deg);}
+    75%{transform:translate(90vw,-30vh) rotate(30deg);}
+    100%{transform:translate(110vw,0) rotate(0deg);}
+}
+
+@keyframes flyPath2{
+    0%{transform:translate(0,0) rotate(0deg);}
+    20%{transform:translate(25vw,30vh) rotate(-30deg);}
+    40%{transform:translate(50vw,-10vh) rotate(20deg);}
+    60%{transform:translate(75vw,20vh) rotate(-40deg);}
+    80%{transform:translate(100vw,-20vh) rotate(10deg);}
+    100%{transform:translate(120vw,0) rotate(0deg);}
+}
+
+@keyframes flyPath3{
+    0%{transform:translate(0,0) rotate(0deg);}
+    30%{transform:translate(40vw,-40vh) rotate(60deg);}
+    60%{transform:translate(80vw,0) rotate(-30deg);}
+    100%{transform:translate(110vw,-20vh) rotate(0deg);}
+}
+
+@keyframes flyPath4{
+    0%{transform:translate(0,0) rotate(0deg);}
+    25%{transform:translate(35vw,20vh) rotate(-45deg);}
+    50%{transform:translate(70vw,-30vh) rotate(30deg);}
+    75%{transform:translate(105vw,10vh) rotate(-15deg);}
+    100%{transform:translate(130vw,0) rotate(0deg);}
+}
+
+@keyframes flyPath5{
+    0%{transform:translate(0,0) rotate(180deg);}
+    25%{transform:translate(-30vw,25vh) rotate(200deg);}
+    50%{transform:translate(-60vw,-15vh) rotate(160deg);}
+    75%{transform:translate(-90vw,20vh) rotate(190deg);}
+    100%{transform:translate(-120vw,0) rotate(180deg);}
+}
+
+@keyframes flyPath6{
+    0%{transform:translate(0,0) rotate(180deg);}
+    20%{transform:translate(-25vw,-35vh) rotate(160deg);}
+    40%{transform:translate(-50vw,15vh) rotate(200deg);}
+    60%{transform:translate(-75vw,-25vh) rotate(170deg);}
+    80%{transform:translate(-100vw,10vh) rotate(190deg);}
+    100%{transform:translate(-130vw,0) rotate(180deg);}
+}
+
+/* ===========================
+   MEMORIAL - NEON FRAME
+=========================== */
+.memorial{
+    margin-top:50px;
+    padding:30px;
+    border:2px solid var(--blue);
+    background:rgba(0,0,0,0.8);
+    box-shadow:
+        0 0 30px rgba(0,243,255,0.3),
+        inset 0 0 30px rgba(0,243,255,0.1);
+    position:relative;
+    backdrop-filter:blur(10px);
+}
+
+.memorial::before{
+    content:'▓▒░ MEMORIAL PROTOCOL ░▒▓';
+    position:absolute;
+    top:-12px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--bg);
+    padding:0 20px;
+    color:var(--blue);
+    font-size:0.8rem;
+    letter-spacing:3px;
+}
+
+.memorial h2{
+    color:var(--red);
+    text-align:center;
+    margin-bottom:20px;
+    font-family:'Orbitron',sans-serif;
+    font-size:1.8rem;
+    text-shadow:
+        0 0 10px var(--red),
+        0 0 20px var(--red),
+        0 0 40px var(--red);
+    animation:memorialGlow 3s infinite alternate;
+}
+
+@keyframes memorialGlow{
+    0%{text-shadow:0 0 10px var(--red);}
+    100%{text-shadow:0 0 30px var(--red), 0 0 60px var(--red);}
+}
+
+.list{
+    height:300px;
+    overflow-y:auto;
+    font-size:1rem;
+    padding-right:10px;
+}
+
+.list::-webkit-scrollbar{
+    width:8px;
+}
+
+.list::-webkit-scrollbar-track{
+    background:rgba(0,0,0,0.5);
+}
+
+.list::-webkit-scrollbar-thumb{
+    background:var(--blue);
+    border-radius:4px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(0,243,255,0.2);
+    transition:all 0.3s;
+    position:relative;
+}
+
+.row:hover{
+    background:rgba(0,243,255,0.1);
+    padding-left:10px;
+    border-left:3px solid var(--blue);
+}
+
+.row span:first-child{
+    color:var(--chrome);
+    text-shadow:0 0 5px rgba(255,255,255,0.3);
+}
+
+.row span:last-child{
+    color:var(--blue);
+    font-family:'VT323',monospace;
+    font-size:1.2rem;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer{
+    margin-top:50px;
+    padding:20px;
+    font-size:0.9rem;
+    color:#666;
+    text-shadow:0 0 10px rgba(0,0,0,0.8);
+    border-top:1px solid rgba(0,255,65,0.2);
+    position:relative;
+}
+
+footer::before{
+    content:'◈';
+    color:var(--green);
+    margin-right:10px;
+    animation:spinSlow 4s linear infinite;
+    display:inline-block;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media(max-width:768px){
+    h1{font-size:2.5rem;}
+    .logo{width:80px;height:80px;}
+    .grid{grid-template-columns:1fr;}
+    .audio-player{bottom:10px;right:10px;left:10px;justify-content:center;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND - Add your French Rebellion video here -->
+<div class="video-container">
+    <video autoplay muted loop playsinline id="bgVideo">
+        <!-- Replace with your video file -->
+        <source src="french-rebellion.mp4" type="video/mp4">
+        <!-- Fallback image -->
+        <img src="cyber-city.jpg" style="width:100%;height:100%;object-fit:cover;">
+    </video>
+</div>
+
+<div class="overlay"></div>
+
+<!-- AUDIO PLAYER - Spice Rebellion -->
+<div class="audio-player">
+    <button onclick="toggleMusic()" id="playBtn">▶ PLAY</button>
+    <div class="audio-visualizer" id="visualizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <span style="color:var(--green);font-size:0.8rem;">SPICE REBELLION</span>
+</div>
+
+<audio id="spiceRebellion" loop>
+    <source src="spice-rebellion.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- NEON BUTTERFLIES -->
+<div class="butterfly-container">
+    <div class="butterfly bf1">
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf2">
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf3">
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf4">
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf5">
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf6">
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    </div>
+</div>
+
+<div class="container">
+
+<header>
+    <div class="sub">// HOT SAUCE AND GIFTS COLLECTIVE //</div>
+
+    <div class="title-zone">
+        <img src="logowatermark.jpg" class="logo" alt="Logo">
+        <h1>SPICY REBELLION</h1>
+    </div>
+</header>
+
+<!-- ===========================
+     NAV BUTTONS
+=========================== -->
+<div class="command">
+    <a href="https://whatchuthink.redbubble.com" class="btn">SHOP</a>
+    <a href="https://gofund.me/8711248e1" class="btn urgent">FUND</a>
+    <a href="lore.html" class="btn lore">THE LORE</a>
+    <a href="shameless.html" class="btn shameless">SHAMELESS CONFESSIONS</a>
+    <a href="Backroom.html" class="btn">WATER</a>
+</div>
+
+<!-- ===========================
+     GRID CARDS
+=========================== -->
+<div class="grid">
+
+    <div class="card">
+        <img src="rebel-fund.jpg" alt="Rebel Fund">
+        <h3>REBEL FUND</h3>
+        <p>Secure the future. Support the movement.</p>
+    </div>
+
+    <div class="card">
+        <img src="mug-graphic.jpg" alt="Supply Drop">
+        <h3>SUPPLY DROP</h3>
+        <p>Official gear for the resistance.</p>
+    </div>
+
+    <div class="card">
+        <img src="mission-feed.jpg" alt="The Collective">
+        <h3>THE COLLECTIVE</h3>
+        <p>Feed the block. Build the community.</p>
+    </div>
+
+</div>
+
+<!-- ===========================
+     MEMORIAL
+=========================== -->
+<div class="memorial">
+    <h2>IN MEMORIAM</h2>
+
+    <div class="list">
+        <div class="row"><span>Trayvon Martin</span><span>2012</span></div>
+        <div class="row"><span>Breonna Taylor</span><span>2020</span></div>
+        <div class="row"><span>George Floyd</span><span>2020</span></div>
+        <div class="row"><span>Tyre Nichols</span><span>2023</span></div>
+        <div class="row"><span>Eric Garner</span><span>2014</span></div>
+        <div class="row"><span>Michael Brown</span><span>2014</span></div>
+        <div class="row"><span>Tamir Rice</span><span>2014</span></div>
+        <div class="row"><span>Freddie Gray</span><span>2015</span></div>
+        <div class="row"><span>Philando Castile</span><span>2016</span></div>
+        <div class="row"><span>Botham Jean</span><span>2018</span></div>
+    </div>
+</div>
+
+<footer>
+    EST 2026 • WASHINGTON D.C. • RESISTANCE IS FERTILE
+</footer>
+
+</div>
+
+<script>
+// Audio Player Control
+const audio = document.getElementById('spiceRebellion');
+const playBtn = document.getElementById('playBtn');
+const visualizer = document.getElementById('visualizer');
+let isPlaying = false;
+
+function toggleMusic() {
+    if (isPlaying) {
+        audio.pause();
+        playBtn.innerHTML = '▶ PLAY';
+        visualizer.style.opacity = '0.3';
+    } else {
+        audio.play();
+        playBtn.innerHTML = '⏸ PAUSE';
+        visualizer.style.opacity = '1';
+    }
+    isPlaying = !isPlaying;
+}
+
+// Random glitch effects on title
+setInterval(() => {
+    const title = document.querySelector('h1');
+    if(Math.random() > 0.95) {
+        title.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+        setTimeout(() => {
+            title.style.transform = 'translate(0,0)';
+        }, 50);
+    }
+}, 100);
+
+// Add more butterflies periodically
+function createButterfly() {
+    const container = document.querySelector('.butterfly-container');
+    const bf = document.createElement('div');
+    bf.className = 'butterfly';
+    bf.style.cssText = `
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        pointer-events: none;
+        filter: drop-shadow(0 0 10px currentColor);
+        top: ${Math.random() * 100}%;
+        left: -50px;
+        color: hsl(${Math.random() * 360}, 100%, 50%);
+        animation: flyPath${Math.floor(Math.random() * 4) + 1} ${15 + Math.random() * 10}s linear forwards;
+    `;
+    bf.innerHTML = `
+        <div class="butterfly-wing left"></div>
+        <div class="butterfly-wing right"></div>
+        <div class="butterfly-body"></div>
+    `;
+    container.appendChild(bf);
+    
+    setTimeout(() => bf.remove(), 25000);
+}
+
+setInterval(createButterfly, 8000);
+</script>
+
+</body>
+</html>
