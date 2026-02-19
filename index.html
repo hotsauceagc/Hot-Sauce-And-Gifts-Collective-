@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Sauce & Gifts Collective | Spicy Rebellion</title>
+    <style>
+        /* CORE CYBERPUNK STYLES */
+        :root {
+            --neon-green: #39ff14;
+            --neon-red: #ff003c;
+            --neon-orange: #ff5e00;
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --bg-color: #050505;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3 { text-transform: uppercase; letter-spacing: 2px; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--neon-green);
+            box-shadow: 0 5px 20px rgba(57, 255, 20, 0.2);
+        }
+        
+        .main-title {
+            color: var(--neon-green);
+            font-size: 3rem;
+            text-shadow: 0 0 10px var(--neon-green);
+            margin: 0;
+        }
+
+        /* --- SECTION 1: THE AUDIO HERO DECK --- */
+        .cyber-audio-deck {
+            position: relative;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(10, 10, 22, 0.8);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .neon-title {
+            color: #fff;
+            font-size: 2rem;
+            text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-blue);
+            margin-bottom: 5px;
+        }
+        
+        .highlight-pink { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
+        .cyber-subtext { color: var(--neon-blue); font-size: 0.9rem; margin-bottom: 25px; }
+
+        .player-wrapper {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 10px;
+            border: 1px solid var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+            border-radius: 50px;
+            display: inline-block;
+            width: 80%;
+            position: relative;
+            z-index: 20;
+        }
+        
+        audio { width: 100%; height: 40px; outline: none; }
+
+        /* BUTTERFLY ANIMATIONS */
+        .cyber-butterfly {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .cyber-butterfly svg path {
+            fill: rgba(255, 0, 255, 0.4);
+            stroke: var(--neon-blue);
+            stroke-width: 2px;
+            animation: wing-flap 0.15s infinite alternate linear;
+            transform-origin: center;
+        }
+        .b-one { top: 15%; left: 10%; animation: float-left 8s infinite ease-in-out; }
+        .b-two { top: 50%; right: 10%; animation: float-right 10s infinite ease-in-out reverse; }
+        .b-two svg path { stroke: var(--neon-pink); fill: rgba(0, 255, 255, 0.4); }
+
+        @keyframes wing-flap { 0% { transform: scaleX(1); } 100% { transform: scaleX(0.1); } }
+        @keyframes float-left { 0%, 100% { transform: translate(0, 0) rotate(-10deg); } 50% { transform: translate(30px, -40px) rotate(10deg); } }
+        @keyframes float-right { 0%, 100% { transform: scale(0.7) translate(0, 0) rotate(15deg); } 50% { transform: scale(0.7) translate(-40px, -50px) rotate(-5deg); } }
+
+        /* --- SECTION 2: THE PIRATE VIDEO FEED --- */
+        .broadcast-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .video-terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            border: 4px solid var(--neon-red);
+            box-shadow: 0 0 20px var(--neon-red);
+            background: #000;
+        }
+
+        .rec-dot {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: red;
+            font-weight: bold;
+            animation: blink 1s infinite;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+        }
+
+        video { width: 100%; display: block; filter: contrast(1.1) saturate(1.2); }
+
+        .video-caption {
+            background: var(--neon-red);
+            color: #000;
+            font-weight: bold;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .highlight-red { color: var(--neon-red); }
+        .highlight-green { color: var(--neon-green); }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- SECTION 3: SHAMELESS CONFESSIONS TEASER --- */
+        .confessions-banner {
+            background: rgba(255, 94, 0, 0.1);
+            border: 2px dashed var(--neon-orange);
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .confessions-banner h2 { color: var(--neon-orange); text-shadow: 0 0 10px var(--neon-orange); }
+        .confessions-banner p { font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="main-title">HOT SAUCE & GIFTS COLLECTIVE</h1>
+        <p style="color: var(--neon-orange);">> SPICY REBELLION PROTOCOL INITIATED</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="cyber-audio-deck">
+            <div class="cyber-butterfly b-one">
+                <svg viewBox="0 0 100 100"><path d="M50 50 L20 10 L10 50 L40 90 Z M50 50 L80 10 L90 50 L60 90 Z" /></svg>
+            </div>
+            <div class="cyber-butterfly b-two">
+                <svg viewBox="0 0 100 100"><path d="M50 50 L20 10 L10 50 L40 90 Z M50 50 L80 10 L90 50 L60 90 Z" /></svg>
+            </div>
+
+            <h2 class="neon-title">SPICE REBELLION <span class="highlight-pink">ANTHEM</span></h2>
+            <p class="cyber-subtext">>> CMDR JAWARA // STATUS: WE MAKE LEMONADE</p>
+
+            <div class="player-wrapper">
+                <audio controls>
+                    <source src="Spice Rebellion.mp3" type="audio/mpeg">
+                    YOUR BROWSER CANNOT HANDLE THIS HEAT.
+                </audio>
+            </div>
+        </section>
+
+        <section class="broadcast-section">
+            <h2>THE <span class="highlight-red">FRENCH OPTION</span></h2>
+            <div class="video-terminal">
+                <div class="rec-dot">● REC</div>
+                <video controls loop poster="https://via.placeholder.com/800x450/000000/ff0000?text=SIGNAL+INTERCEPTED">
+                    <source src="guillotine_broadcast.mp4" type="video/mp4">
+                    BROWSER INCOMPATIBLE.
+                </video>
+                <div class="video-caption">
+                    >> SOURCE: GRITS & EGGS PODCAST // PRIORITY: CRITICAL<br>
+                    "THE TIME TO BE THE BIGGER PERSON HAS PASSED."
+                </div>
+            </div>
+        </section>
+
+        <section class="confessions-banner">
+            <h2>SHAMELESS CONFESSIONS</h2>
+            <p>Step into the circle. No judgment. Just heat.</p>
+            <p style="color: #888;">>> Origin File: Jawara the Menace [UNLOCKED]</p>
+        </section>
+
+    </div>
+
+</body>
+</html>
