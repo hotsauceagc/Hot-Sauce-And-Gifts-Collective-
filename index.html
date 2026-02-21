@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE SPICY REBELLION</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- HYPERPUNK SYSTEM COLORS --- */
+        :root {
+            --bg-color: #07050A; 
+            --neon-purple: #B026FF; 
+            --neon-pink: #FF007A; 
+            --holo-blue: #00f3ff;
+            --neon-red: #ff2a2a;
+            --cherry-red: #ff0033; /* The brilliant red for the title */
+            --cherry-glow: #ff1a40;
+            --text-chrome: #e0e0e0;
+            --alert-orange: #ff9900;
+        }
+
+        /* --- RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* --- BODY STYLES --- */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-chrome);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 20px;
+            background-image: 
+                linear-gradient(rgba(176, 38, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(176, 38, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+            position: relative; 
+            overflow-x: hidden;
+        }
+
+        /* --- VIDEO BACKGROUND --- */
+        .video-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            opacity: 0.3;
+            mix-blend-mode: overlay;
+            background-color: var(--bg-color);
+        }
+        
+        .video-container video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(1.1);
+            filter: contrast(1.5) saturate(0) brightness(0.6) sepia(1) hue-rotate(-50deg) blur(0.5px);
+        }
+
+        /* --- THE FORCED WATERMARK --- */
+        .watermark-layer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; 
+            max-width: 600px;
+            opacity: 0.2; 
+            z-index: -1; 
+            pointer-events: none; 
+            filter: grayscale(100%); 
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(5, 5, 5, 0.8); 
+            padding: 20px;
+            border: 1px solid var(--neon-purple);
+            box-shadow: 0 0 50px rgba(176, 38, 255, 0.2);
+            backdrop-filter: blur(2px); 
+            z-index: 10;
+            position: relative;
+        }
+
+        /* --- HEADER & STATIC LOGO --- */
+        header {
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-bottom: 2px solid var(--neon-purple);
+            padding-bottom: 20px;
+        }
+
+        .little-spicy {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--cherry-red);
+            box-shadow: 0 0 15px var(--cherry-red);
+            object-fit: contain;
+            background: rgba(0,0,0,0.5);
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        .sub-header {
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        /* THE EASTER EGG CSS */
+        .secret-f {
+            color: var(--neon-purple);
+            text-shadow: 0 0 8px var(--neon-purple);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .secret-f:hover {
+            color: var(--holo-blue);
+            text-shadow: 0 0 15px var(--holo-blue);
+        }
+
+        /* BRILLIANT CHERRY RED TITLE */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--cherry-red);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--cherry-red), 0 0 20px var(--cherry-glow);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* STATIC NEON BUTTERFLIES */
+        .static-butterfly {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 10px var(--holo-blue));
+        }
+
+        /* --- BUTTONS --- */
+        .command-deck {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap; 
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--holo-blue);
+            color: var(--holo-blue);
+            padding: 12px 25px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: 0.3s;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--holo-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--holo-blue);
+        }
+
+        .btn-urgent {
+            border-color: var(--neon-red);
+            color: var(--neon-red);
+        }
+
+        .btn-urgent:hover {
+            background: var(--neon-red);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-red);
+        }
+        
+        .btn-lore {
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+        .btn-lore:hover {
+            background: var(--neon-purple);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+        
+        .btn-water {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+        .btn-water:hover {
+            background: var(--neon-pink);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        /* --- CARD GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid #333;
+            padding: 15px;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.3);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain; 
+            background: #000;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        
+        .card-img.cover {
+            object-fit: cover;
+        }
+
+        .card h3 {
+            color: var(--neon-purple);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        /* Small action buttons inside cards */
+        .card-actions {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mini-btn {
+            font-size: 0.75rem;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid #555;
+            background: #111;
+            text-transform: uppercase;
+        }
+        .mini-btn:hover {
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        /* --- AUDIO PLAYER CSS --- */
+        .audio-matrix {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid var(--neon-purple);
+            padding: 15px;
+            font-family: 'VT323', monospace;
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.4);
+            min-width: 280px;
+        }
+
+        .audio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--neon-purple);
+            padding-bottom: 5px;
+        }
+
+        .audio-title {
+            color: var(--neon-purple);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .play-btn {
+            background: transparent;
+            border: 1px solid var(--neon-purple);
+            color: var(--neon-purple);
+            padding: 5px 15px;
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background: var(--neon-purple);
+            color: #000;
+        }
+
+        .track-name {
+            margin-top: 8px;
+            color: var(--holo-blue);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="guillotine_broadcast.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <img src="logowatermark.jpg" class="watermark-layer" alt="Background Logo">
+
+    <div class="audio-matrix">
+        <div class="audio-header">
+            <span class="audio-title">NOW PLAYING</span>
+        </div>
+        <div class="audio-controls">
+            <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶ PLAY</button>
+        </div>
+        <div class="track-name">SPICY REBELLION.mp3</div>
+    </div>
+
+    <audio id="spiceRebellion" loop>
+        <source src="spicy_rebellion.mp3" type="audio/mpeg">
+        <source src="spicy_rebellion_1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        
+        <header>
+            <img src="hotsauce_logo.png" alt="Little Spicy Logo" class="little-spicy" onerror="this.style.display='none'">
+            
+            <div class="sub-header">// HOT SAUCE AND GI<span class="secret-f" onclick="window.location.href='shameless.html'">F</span>TS COLLECTIVE //</div>
+            
+            <h1><span class="static-butterfly">🦋</span> SPICY REBELLION 🌶️ <span class="static-butterfly">🦋</span></h1>
+        </header>
+
+        <div class="command-deck">
+            <a href="https://whatchuthink.redbubble.com" target="_blank" class="btn">[ SHOP ]</a>
+            <a href="https://gofund.me/8711248e1" class="btn btn-urgent">[ FUND ]</a>
+            <a href="lore.html" class="btn btn-lore">[ THE LORE ]</a>
+            <a href="water.html" class="btn btn-water">[ WATER ]</a>
+            <a href="shameless.html" class="btn btn-lore">[ CONFESSIONS ]</a>
+        </div>
+
+        <div class="grid">
+
+            <div class="card" onclick="window.location.href='https://gofund.me/8711248e1'" style="cursor:pointer;">
+                <img src="rebel-fund.jpg" class="card-img" alt="Rebel Fund">
+                <div>
+                    <h3>REBEL FUND</h3>
+                    <p>PRIORITY ONE: SECURE THE LAND</p>
+                </div>
+                <div class="card-actions">
+                     <span class="mini-btn" style="border-color:var(--neon-red); color:var(--neon-red);">DONATE NOW</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="mug-graphic.jpg" class="card-img" alt="Mug">
+                <div>
+                    <h3>SUPPLY DROP</h3>
+                    <p>OFFICIAL GEAR & LEGACY HEAT</p>
+                </div>
+                <div class="card-actions">
+                    <a href="https://www.redbubble.com/i/mug/Rebels-vs-The-Empire-by-whatchuthink/176371034.9Q0AD" target="_blank" class="mini-btn">MUG</a>
+                    <a href="https://www.walmart.com/search?q=tabasco+sauce" target="_blank" class="mini-btn">TABASCO</a>
+                    <a href="https://www.walmart.com/search?q=crystal+hot+sauce" target="_blank" class="mini-btn">CRYSTAL</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="mission-feed.jpg" class="card-img cover" alt="Mission">
+                <div>
+                    <h3>THE COLLECTIVE</h3>
+                    <p>FEED THE BLOCK. BAGS FROM $0.89</p>
+                </div>
+                <div class="card-actions">
+                    <a href="https://www.walmart.com/search?q=bulk+rice" target="_blank" class="mini-btn">[ RICE ]</a>
+                    <a href="https://www.walmart.com/search?q=great+value+dry+beans" target="_blank" class="mini-btn">[ BEANS ]</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="snews-feed.jpg" class="card-img cover" alt="SNEWS Feed">
+                <div>
+                    <h3>SNEWS NETWORK</h3>
+                    <p>SATIRE & POLITICAL INTEL. UNFILTERED TRUTH.</p>
+                </div>
+                <div class="card-actions">
+                    <a href="snews.html" class="btn" style="width: 100%; border-color: var(--alert-orange); color: var(--alert-orange);">[ READ THE WIRE ]</a>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            EST. 2026 // WASHINGTON D.C. // END TRANSMISSION
+        </footer>
+
+    </div>
+
+    <script>
+        /* --- AUDIO SYSTEM SCRIPT --- */
+        const audio = document.getElementById('spiceRebellion');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.textContent = '▶ PLAY';
+            } else {
+                audio.play().catch(()=>{});
+                playBtn.textContent = '⏸ PAUSE';
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+</body>
+</html>
