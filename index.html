@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SPICY REBELLION 🌶️ | Hot Sauce and Gifts Collective</title>
+
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================
+   CORE SYSTEM - 2026 REBELLION
+=========================== */
+:root{
+  --void:#000000;
+  --blood:#ff0033;
+  --crimson:#ff1a1a;
+  --neon-red:#ff0040;
+  --hot-pink:#ff0066;
+  --cyan:#00ffff;
+  --electric-blue:#0080ff;
+  --matrix-green:#00ff41;
+  --amber:#ffaa00;
+  --white:#ffffff;
+  --gray:#888888;
+  --dark:#0a0a0f;
+  --glass:rgba(255,0,51,0.05);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  image-rendering:pixelated;
+}
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--void);
+  font-family:'VT323',monospace;
+  color:var(--white);
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+  font-size:18px;
+  line-height:1.4;
+}
+
+/* ===========================
+   MATRIX RAIN BACKGROUND
+=========================== */
+#matrix-canvas{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:0;
+  opacity:0.15;
+  pointer-events:none;
+}
+
+/* ===========================
+   VIDEO BACKGROUND - GRITTY
+=========================== */
+.video-container{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:1;
+  overflow:hidden;
+  opacity:0.3;
+  mix-blend-mode:overlay;
+}
+
+.video-container video{
+  min-width:100%;
+  min-height:100%;
+  width:auto;
+  height:auto;
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(1.1);
+  filter:contrast(1.5) saturate(0) brightness(0.6) sepia(1) hue-rotate(-50deg) blur(0.5px);
+}
+
+/* ===========================
+   SCANLINE AND CRT EFFECTS
+=========================== */
+.crt-overlay{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%);
+  background-size:100% 4px;
+  z-index:2;
+  pointer-events:none;
+  animation:flicker 0.15s infinite;
+}
+
+@keyframes flicker{
+  0%{opacity:0.97;}
+  50%{opacity:1;}
+  100%{opacity:0.98;}
+}
+
+.scanline{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:10px;
+  background:rgba(255,0,51,0.1);
+  z-index:3;
+  pointer-events:none;
+  animation:scan 8s linear infinite;
+  box-shadow:0 0 20px var(--blood);
+}
+
+@keyframes scan{
+  0%{transform:translateY(-100vh);}
+  100%{transform:translateY(100vh);}
+}
+
+/* ===========================
+   AMBIENT GLOW
+=========================== */
+.ambient-glow{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255,0,51,0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(0,255,255,0.1) 0%, transparent 40%);
+  z-index:1;
+  pointer-events:none;
+  animation:glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+  0%,100%{opacity:0.8;}
+  50%{opacity:1;}
+}
+
+/* ===========================
+   AUDIO PLAYER
+=========================== */
+.audio-matrix{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:100;
+  background:rgba(0,0,0,0.9);
+  border:2px solid var(--blood);
+  padding:15px;
+  font-family:'VT323',monospace;
+  box-shadow:0 0 20px rgba(255,0,51,0.4), inset 0 0 20px rgba(255,0,51,0.1);
+  min-width:280px;
+}
+
+.audio-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  border-bottom:1px solid var(--blood);
+  padding-bottom:5px;
+}
+
+.audio-title{
+  color:var(--blood);
+  font-size:1.2rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  text-shadow:0 0 10px var(--blood);
+}
+
+.audio-status{
+  width:10px;
+  height:10px;
+  background:var(--matrix-green);
+  border-radius:50%;
+  animation:blink 1s infinite;
+  box-shadow:0 0 10px var(--matrix-green);
+}
+
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:0.3;}
+}
+
+.audio-controls{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.play-btn{
+  background:transparent;
+  border:2px solid var(--blood);
+  color:var(--blood);
+  padding:8px 20px;
+  font-family:'VT323',monospace;
+  font-size:1.1rem;
+  cursor:pointer;
+  text-transform:uppercase;
+  transition:all 0.3s;
+  text-shadow:0 0 5px var(--blood);
+}
+
+.play-btn:hover{
+  background:var(--blood);
+  color:var(--void);
+  box-shadow:0 0 30px var(--blood);
+}
+
+.visualizer{
+  display:flex;
+  gap:3px;
+  height:30px;
+  align-items:flex-end;
+  flex:1;
+}
+
+.v-bar{
+  width:6px;
+  background:linear-gradient(to top,var(--blood),var(--hot-pink));
+  opacity:0.3;
+  transition:height 0.1s;
+}
+
+.v-bar.active{
+  opacity:1;
+  box-shadow:0 0 10px var(--blood);
+  animation:dance 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes dance{
+  0%{height:20%;}
+  100%{height:100%;}
+}
+
+.track-name{
+  margin-top:8px;
+  color:var(--cyan);
+  font-size:0.9rem;
+  letter-spacing:1px;
+}
+
+/* ===========================
+   MAIN CONTAINER
+=========================== */
+.container{
+  position:relative;
+  z-index:10;
+  max-width:1200px;
+  margin:0 auto;
+  padding:40px 20px;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+header{
+  margin-bottom:50px;
+  padding:30px;
+  background:rgba(0,0,0,0.7);
+  border:2px solid var(--blood);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 40px rgba(255,0,51,0.2), inset 0 0 40px rgba(255,0,51,0.05);
+}
+
+header::before{
+  content:'';
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--blood),var(--cyan),var(--blood),transparent);
+  animation:dataStream 3s linear infinite;
+}
+
+@keyframes dataStream{
+  0%{transform:translateX(-100%);}
+  100%{transform:translateX(100%);}
+}
+
+.sub-header{
+  text-align:center;
+  color:var(--cyan);
+  font-size:1rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+  text-shadow:0 0 10px var(--cyan);
+  font-family:'Share Tech Mono',monospace;
+}
+
+.title-zone{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+/* ===========================
+   LOGO CONTAINER
+=========================== */
+.logo-container{
+  position:relative;
+  width:150px;
+  height:150px;
+  animation:logoFloat 6s ease-in-out infinite;
+}
+
+.logo-mascot{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 0 20px var(--blood)) drop-shadow(0 0 40px rgba(255,0,51,0.5));
+  animation:logoGlitch 5s infinite;
+  position:relative;
+  z-index:2;
+  border-radius:50%;
+  border:3px solid var(--blood);
+  background:rgba(0,0,0,0.5);
+  padding:5px;
+}
+
+.logo-ring{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  border:2px solid var(--blood);
+  border-radius:50%;
+  opacity:0.6;
+  pointer-events:none;
+}
+
+.logo-ring:nth-child(1){ width:170px; height:170px; animation:ringPulse 3s infinite; }
+.logo-ring:nth-child(2){ width:190px; height:190px; animation:ringPulse 3s infinite 0.5s; }
+.logo-ring:nth-child(3){ width:210px; height:210px; animation:ringPulse 3s infinite 1s; }
+
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+@keyframes logoGlitch{
+  0%,100%{transform:translate(0);}
+  92%{transform:translate(0);}
+  93%{transform:translate(-2px,2px);}
+  94%{transform:translate(2px,-2px);}
+  95%{transform:translate(0);}
+}
+
+@keyframes ringPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.6;}
+  50%{transform:translate(-50%,-50%) scale(1.1);opacity:0;}
+}
+
+h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:3.5rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:5px;
+  color:var(--white);
+  text-shadow:0 0 10px var(--blood), 0 0 20px var(--blood), 0 0 40px var(--blood), 0 0 80px rgba(255,0,51,0.5);
+  position:relative;
+  animation:textFlicker 4s infinite;
+}
+
+h1 .emoji{
+  font-size:2.5rem;
+  filter:drop-shadow(0 0 20px var(--blood));
+  animation:shake 2s infinite;
+}
+
+@keyframes shake{
+  0%,100%{transform:rotate(0deg);}
+  25%{transform:rotate(-10deg);}
+  75%{transform:rotate(10deg);}
+}
+
+@keyframes textFlicker{
+  0%,100%{opacity:1;}
+  45%{opacity:0.95;}
+  48%{opacity:0.7;}
+  50%{opacity:1;}
+  52%{opacity:0.9;}
+  54%{opacity:1;}
+}
+
+/* ===========================
+   NAVIGATION BUTTONS
+=========================== */
+.command{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:center;
+  margin:40px 0;
+}
+
+.btn{
+  position:relative;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.8);
+  border:2px solid;
+  color:var(--white);
+  text-decoration:none;
+  font-family:'VT323',monospace;
+  font-size:1.2rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  transition:all 0.3s;
+  overflow:hidden;
+  clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.btn::before{
+  content:'';
+  position:absolute;
+  top:0; left:-100%;
+  width:100%; height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  transition:left 0.5s;
+}
+
+.btn:hover::before{ left:100%; }
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+.btn-primary{
+  border-color:var(--blood);
+  color:var(--blood);
+  text-shadow:0 0 10px var(--blood);
+}
+.btn-primary:hover{
+  background:var(--blood);
+  color:var(--void);
+  box-shadow:0 0 40px var(--blood);
+}
+
+.btn-cyan{
+  border-color:var(--cyan);
+  color:var(--cyan);
+  text-shadow:0 0 10px var(--cyan);
+}
+.btn-cyan:hover{
+  background:var(--cyan);
+  color:var(--void);
+  box-shadow:0 0 40px var(--cyan);
+}
+
+.btn-matrix{
+  border-color:var(--matrix-green);
+  color:var(--matrix-green);
+  text-shadow:0 0 10px var(--matrix-green);
+}
+.btn-matrix:hover{
+  background:var(--matrix-green);
+  color:var(--void);
+  box-shadow:0 0 40px var(--matrix-green);
+}
+
+.btn-urgent{
+  border-color:var(--amber);
+  color:var(--amber);
+  text-shadow:0 0 10px var(--amber);
+  animation:urgentPulse 2s infinite;
+}
+
+@keyframes urgentPulse{
+  0%,100%{box-shadow:0 0 5px var(--amber);}
+  50%{box-shadow:0 0 20px var(--amber), 0 0 40px var(--amber);}
+}
+
+.btn-urgent:hover{
+  background:var(--amber);
+  color:var(--void);
+}
+
+/* ===========================
+   CONTENT GRID
+=========================== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+  margin:40px 0;
+}
+
+.card{
+  background:rgba(0,0,0,0.8);
+  border:2px solid var(--blood);
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s;
+  box-shadow:0 0 20px rgba(255,0,51,0.1);
+}
+
+.card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:2px;
+  background:linear-gradient(90deg,var(--blood),var(--cyan),var(--blood));
+  transform:translateX(-100%);
+  transition:transform 0.6s;
+}
+
+.card:hover::before{ transform:translateX(100%); }
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(255,0,51,0.3);
+  border-color:var(--cyan);
+}
+
+.card-image{
+  width:100%;
+  height:180px;
+  background:rgba(255,0,51,0.1);
+  margin-bottom:15px;
+  border:1px solid rgba(255,0,51,0.3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--blood);
+  font-size:0.9rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card-image::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,51,0.05) 2px, rgba(255,0,51,0.05) 4px);
+  pointer-events:none;
+}
+
+.card h3{
+  color:var(--blood);
+  font-family:'Orbitron',sans-serif;
+  font-size:1.3rem;
+  margin-bottom:10px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  text-shadow:0 0 10px rgba(255,0,51,0.5);
+}
+
+.card p{
+  color:var(--gray);
+  font-size:1.1rem;
+  line-height:1.5;
+}
+
+.card-tag{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:var(--blood);
+  color:var(--void);
+  padding:3px 10px;
+  font-size:0.8rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:bold;
+}
+
+/* ===========================
+   NEON BUTTERFLIES
+=========================== */
+.butterfly-sanctuary{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  z-index:50;
+  overflow:hidden;
+}
+
+.neon-butterfly{
+  position:absolute;
+  width:80px;
+  height:80px;
+  pointer-events:none;
+  filter:drop-shadow(0 0 20px currentColor);
+  animation:flyPattern var(--duration) linear infinite;
+  animation-delay:var(--delay);
+  top:var(--start-y);
+  left:var(--start-x);
+  color:var(--butterfly-color);
+  z-index:50;
+}
+
+.butterfly-body{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:8px;
+  height:50px;
+  background:linear-gradient(to bottom,#333,currentColor,#333);
+  border-radius:4px;
+  z-index:2;
+  box-shadow:0 0 15px currentColor;
+}
+
+.butterfly-head{
+  position:absolute;
+  left:50%;
+  top:20%;
+  transform:translateX(-50%);
+  width:12px;
+  height:12px;
+  background:currentColor;
+  border-radius:50%;
+  z-index:3;
+  box-shadow:0 0 10px currentColor;
+}
+
+.antenna{
+  position:absolute;
+  top:15%;
+  width:2px;
+  height:25px;
+  background:currentColor;
+  border-radius:1px;
+  box-shadow:0 0 5px currentColor;
+  transform-origin:bottom center;
+}
+
+.antenna.left{
+  left:45%;
+  transform:rotate(-25deg);
+  animation:antennaLeft 0.3s infinite alternate;
+}
+.antenna.right{
+  right:45%;
+  transform:rotate(25deg);
+  animation:antennaRight 0.3s infinite alternate;
+}
+
+@keyframes antennaLeft{ 0%{transform:rotate(-25deg);} 100%{transform:rotate(-35deg);} }
+@keyframes antennaRight{ 0%{transform:rotate(25deg);} 100%{transform:rotate(35deg);} }
+
+.wing{
+  position:absolute;
+  background:currentColor;
+  opacity:0.85;
+  box-shadow:0 0 30px currentColor, inset 0 0 20px rgba(255,255,255,0.3);
+  animation:wingBeat 0.2s infinite alternate;
+}
+
+.wing.fore-left{
+  width:35px; height:45px;
+  left:5px; top:15%;
+  border-radius:80% 20% 60% 40%;
+  transform-origin:right center;
+  transform:rotate(-20deg);
+}
+.wing.fore-right{
+  width:35px; height:45px;
+  right:5px; top:15%;
+  border-radius:20% 80% 40% 60%;
+  transform-origin:left center;
+  transform:rotate(20deg);
+}
+.wing.hind-left{
+  width:25px; height:35px;
+  left:15px; top:45%;
+  border-radius:60% 40% 80% 20%;
+  transform-origin:right center;
+  transform:rotate(-15deg);
+}
+.wing.hind-right{
+  width:25px; height:35px;
+  right:15px; top:45%;
+  border-radius:40% 60% 20% 80%;
+  transform-origin:left center;
+  transform:rotate(15deg);
+}
+
+@keyframes wingBeat{
+  0%{transform:rotateY(0deg) rotate(var(--base-rotate));}
+  100%{transform:rotateY(60deg) rotate(var(--base-rotate));}
+}
+
+.wing.fore-left{--base-rotate:-20deg;}
+.wing.fore-right{--base-rotate:20deg;}
+.wing.hind-left{--base-rotate:-15deg;}
+.wing.hind-right{--base-rotate:15deg;}
+
+.wing::after{
+  content:'';
+  position:absolute;
+  inset:10%;
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:inherit;
+}
+
+@keyframes flyPattern{
+  0%{transform:translate(0,0) rotate(0deg) scale(0.8);}
+  15%{transform:translate(15vw,-20vh) rotate(30deg) scale(1);}
+  30%{transform:translate(35vw,10vh) rotate(-20deg) scale(0.9);}
+  45%{transform:translate(55vw,-30vh) rotate(40deg) scale(1.1);}
+  60%{transform:translate(75vw,0) rotate(-30deg) scale(0.95);}
+  75%{transform:translate(90vw,-20vh) rotate(20deg) scale(1);}
+  90%{transform:translate(105vw,10vh) rotate(-10deg) scale(0.85);}
+  100%{transform:translate(120vw,0) rotate(0deg) scale(0.8);}
+}
+
+.bf-crimson{--butterfly-color:#ff0033;}
+.bf-pink{--butterfly-color:#ff0066;}
+.bf-orange{--butterfly-color:#ff4400;}
+.bf-amber{--butterfly-color:#ffaa00;}
+.bf-cyan{--butterfly-color:#00ffff;}
+.bf-blue{--butterfly-color:#0080ff;}
+.bf-matrix{--butterfly-color:#00ff41;}
+
+/* ===========================
+   MEMORIAL
+=========================== */
+.memorial{
+  margin:50px 0;
+  padding:30px;
+  background:rgba(0,0,0,0.8);
+  border:2px solid var(--cyan);
+  position:relative;
+  box-shadow:0 0 30px rgba(0,255,255,0.2);
+}
+
+.memorial::before{
+  content:'IN MEMORIAM';
+  position:absolute;
+  top:-12px;
+  left:20px;
+  background:var(--void);
+  padding:0 15px;
+  color:var(--cyan);
+  font-size:1rem;
+  letter-spacing:2px;
+}
+
+.memorial h2{
+  color:var(--blood);
+  font-family:'Orbitron',sans-serif;
+  font-size:1.8rem;
+  text-align:center;
+  margin-bottom:20px;
+  text-transform:uppercase;
+  letter-spacing:5px;
+  text-shadow:0 0 10px var(--blood), 0 0 20px var(--blood);
+  animation:memorialGlow 3s infinite alternate;
+}
+
+@keyframes memorialGlow{
+  0%{text-shadow:0 0 10px var(--blood);}
+  100%{text-shadow:0 0 30px var(--blood), 0 0 60px var(--blood);}
+}
+
+.memorial-list{
+  display:grid;
+  gap:10px;
+  max-height:300px;
+  overflow-y:auto;
+  padding-right:10px;
+}
+
+.memorial-list::-webkit-scrollbar{ width:8px; }
+.memorial-list::-webkit-scrollbar-track{ background:rgba(0,255,255,0.1); }
+.memorial-list::-webkit-scrollbar-thumb{ background:var(--cyan); border-radius:4px; }
+
+.memorial-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:rgba(0,255,255,0.05);
+  border:1px solid rgba(0,255,255,0.2);
+  transition:all 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.memorial-item::before{
+  content:'>';
+  position:absolute;
+  left:5px;
+  color:var(--blood);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+
+.memorial-item:hover{
+  background:rgba(255,0,51,0.1);
+  border-color:var(--blood);
+  padding-left:25px;
+}
+
+.memorial-item:hover::before{ opacity:1; }
+
+.memorial-name{
+  color:var(--white);
+  font-size:1.2rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.memorial-year{
+  color:var(--cyan);
+  font-family:'Share Tech Mono',monospace;
+  font-size:1rem;
+  padding:5px 15px;
+  border:1px solid var(--cyan);
+  background:rgba(0,255,255,0.1);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer{
+  margin-top:50px;
+  padding:30px;
+  text-align:center;
+  border-top:2px solid var(--blood);
+  background:rgba(0,0,0,0.8);
+  position:relative;
+}
+
+footer::before{
+  content:'';
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--blood),transparent);
+}
+
+.footer-content{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.9rem;
+  color:var(--gray);
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.footer-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.status-dot{
+  width:8px;
+  height:8px;
+  background:var(--matrix-green);
+  border-radius:50%;
+  animation:blink 2s infinite;
+  box-shadow:0 0 10px var(--matrix-green);
+}
+
+.footer-copy{
+  color:var(--blood);
+  font-size:1rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  text-shadow:0 0 10px rgba(255,0,51,0.5);
+}
+
+/* ===========================
+   EASTER EGG (KONAMI)
+=========================== */
+.konami-active{ animation:glitchMode 0.5s infinite; }
+
+@keyframes glitchMode{
+  0%{filter:hue-rotate(0deg);}
+  50%{filter:hue-rotate(180deg) contrast(2);}
+  100%{filter:hue-rotate(360deg);}
+}
+
+.hidden-message{
+  display:none;
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.95);
+  border:3px solid var(--matrix-green);
+  padding:40px;
+  z-index:1000;
+  text-align:center;
+  box-shadow:0 0 100px var(--matrix-green);
+}
+
+.hidden-message.show{
+  display:block;
+  animation:fadeIn 0.5s;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translate(-50%,-50%) scale(0.8);}
+  to{opacity:1;transform:translate(-50%,-50%) scale(1);}
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media(max-width:768px){
+  h1{font-size:2rem;}
+  .logo-container{width:100px;height:100px;}
+  .btn{font-size:1rem;padding:12px 20px;}
+  .audio-matrix{left:10px;right:10px;bottom:10px;}
+  .neon-butterfly{transform:scale(0.6);}
+}
+</style>
+</head>
+
+<body>
+<canvas id="matrix-canvas"></canvas>
+
+<div class="video-container">
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="guillotine_broadcast.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="crt-overlay"></div>
+<div class="scanline"></div>
+<div class="ambient-glow"></div>
+
+<div class="audio-matrix">
+  <div class="audio-header">
+    <span class="audio-title">NOW PLAYING</span>
+    <div class="audio-status"></div>
+  </div>
+  <div class="audio-controls">
+    <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶ PLAY</button>
+    <div class="visualizer" id="visualizer">
+      <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+      <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+    </div>
+  </div>
+  <div class="track-name">SPICY REBELLION.mp3 — HOT SAUCE AND GIFTS COLLECTIVE</div>
+</div>
+
+<audio id="spiceRebellion" loop>
+  <source src="spicy Rebellion.mp3" type="audio/mpeg">
+  <source src="spicy Rebellion (1).mp3" type="audio/mpeg">
+</audio>
+
+<div class="butterfly-sanctuary" id="butterflyContainer"></div>
+
+<div class="hidden-message" id="hiddenMessage">
+  <h2 style="color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:2rem;margin-bottom:20px;text-shadow:0 0 20px var(--matrix-green);">
+    SYSTEM BREACH DETECTED
+  </h2>
+  <p style="color:var(--white);font-size:1.2rem;margin-bottom:20px;">Welcome to the resistance.</p>
+  <p style="color:var(--cyan);font-size:1rem;">The butterflies remember. The sauce remembers.</p>
+  <button onclick="document.getElementById('hiddenMessage').classList.remove('show')"
+    style="margin-top:20px;padding:10px 30px;background:var(--blood);border:none;color:var(--void);font-family:'VT323',monospace;font-size:1.2rem;cursor:pointer;text-transform:uppercase;">
+    CLOSE
+  </button>
+</div>
+
+<main class="container">
+  <header>
+    <div class="sub-header">// HOT SAUCE AND GIFTS COLLECTIVE // EST 2026 //</div>
+
+    <div class="title-zone">
+      <div class="logo-container">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+
+        <img src="hotsauce_logo.png"
+             alt="Hot Sauce and Gifts Collective - Spicy Rebellion"
+             class="logo-mascot"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+
+        <div style="display:none;width:100%;height:100%;border-radius:50%;background:var(--blood);align-items:center;justify-content:center;font-size:3rem;">
+          🌶️
+        </div>
+      </div>
+
+      <h1>SPICY REBELLION <span class="emoji">🌶️</span></h1>
+    </div>
+  </header>
+
+  <nav class="command">
+    <a href="https://whatchuthink.redbubble.com" class="btn btn-primary">Supply Drop</a>
+    <a href="https://gofund.me/8711248e1" class="btn btn-urgent">Fund the Revolution</a>
+    <a href="lore.html" class="btn btn-cyan">The Lore</a>
+    <a href="shameless.html" class="btn btn-matrix">Shameless Confessions</a>
+    <a href="Backroom.html" class="btn btn-cyan">Water</a>
+  </nav>
+
+  <section class="grid">
+    <article class="card">
+      <div class="card-image">
+        <span>REBEL FUND VISUAL</span>
+        <span class="card-tag">PRIORITY</span>
+      </div>
+      <h3>Rebel Fund</h3>
+      <p>Secure the future. Support the movement. Financial autonomy for community liberation.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-image">
+        <span>SUPPLY DROP VISUAL</span>
+        <span class="card-tag">GEAR</span>
+      </div>
+      <h3>Supply Drop</h3>
+      <p>Official gear. Wear the message. Become the movement.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-image">
+        <span>COLLECTIVE VISUAL</span>
+        <span class="card-tag">ACTIVE</span>
+      </div>
+      <h3>The Collective</h3>
+      <p>Feed the block. Build the community. No one eats until everyone eats.</p>
+    </article>
+  </section>
+
+  <section class="memorial">
+    <h2>In Memoriam</h2>
+
+    <div class="memorial-list">
+      <div class="memorial-item"><span class="memorial-name">Trayvon Martin</span><span class="memorial-year">2012</span></div>
+      <div class="memorial-item"><span class="memorial-name">Breonna Taylor</span><span class="memorial-year">2020</span></div>
+      <div class="memorial-item"><span class="memorial-name">George Floyd</span><span class="memorial-year">2020</span></div>
+      <div class="memorial-item"><span class="memorial-name">Tyre Nichols</span><span class="memorial-year">2023</span></div>
+      <div class="memorial-item"><span class="memorial-name">Eric Garner</span><span class="memorial-year">2014</span></div>
+      <div class="memorial-item"><span class="memorial-name">Michael Brown</span><span class="memorial-year">2014</span></div>
+      <div class="memorial-item"><span class="memorial-name">Tamir Rice</span><span class="memorial-year">2014</span></div>
+      <div class="memorial-item"><span class="memorial-name">Philando Castile</span><span class="memorial-year">2016</span></div>
+      <div class="memorial-item"><span class="memorial-name">Botham Jean</span><span class="memorial-year">2018</span></div>
+      <div class="memorial-item"><span class="memorial-name">Freddie Gray</span><span class="memorial-year">2015</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-item"><span class="status-dot"></span> System Active</div>
+      <div class="footer-item">EST 2026</div>
+      <div class="footer-item">Washington DC</div>
+      <div class="footer-item">Resistance is fertile</div>
+    </div>
+    <div class="footer-copy">SPICY REBELLION // HOT SAUCE AND GIFTS COLLECTIVE</div>
+  </footer>
+</main>
+
+<script>
+/* ===========================
+   MATRIX RAIN EFFECT
+=========================== */
+const canvas = document.getElementById('matrix-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+/* removed the ampersand from the character set */
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^*()_+-=[]{}|;:,.<>?';
+const charArray = chars.split('');
+const fontSize = 14;
+
+function initDrops(){
+  const columns = Math.floor(canvas.width / fontSize);
+  const drops = new Array(columns).fill(0).map(() => Math.random() * -100);
+  return drops;
+}
+
+let drops = initDrops();
+
+function drawMatrix(){
+  ctx.fillStyle = 'rgba(0,0,0,0.05)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = '#ff0033';
+  ctx.font = fontSize + 'px VT323';
+
+  for(let i=0;i<drops.length;i++){
+    const text = charArray[Math.floor(Math.random() * charArray.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+
+setInterval(drawMatrix, 35);
+
+window.addEventListener('resize', ()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  drops = initDrops();
+});
+
+/* ===========================
+   NEON BUTTERFLIES
+=========================== */
+const butterflyContainer = document.getElementById('butterflyContainer');
+const butterflyColors = ['bf-crimson','bf-pink','bf-orange','bf-amber','bf-cyan','bf-blue','bf-matrix'];
+
+function createButterfly(){
+  const bf = document.createElement('div');
+  const colorClass = butterflyColors[Math.floor(Math.random() * butterflyColors.length)];
+  const duration = 20 + Math.random() * 15;
+  const delay = Math.random() * 10;
+  const startY = Math.random() * 70 + 15;
+
+  bf.className = 'neon-butterfly ' + colorClass;
+  bf.style.setProperty('--duration', duration + 's');
+  bf.style.setProperty('--delay', delay + 's');
+  bf.style.setProperty('--start-y', startY + '%');
+  bf.style.setProperty('--start-x', '-100px');
+
+  bf.innerHTML = `
+    <div class="wing fore-left"></div>
+    <div class="wing fore-right"></div>
+    <div class="wing hind-left"></div>
+    <div class="wing hind-right"></div>
+    <div class="butterfly-body"></div>
+    <div class="butterfly-head"></div>
+    <div class="antenna left"></div>
+    <div class="antenna right"></div>
+  `;
+
+  butterflyContainer.appendChild(bf);
+
+  setTimeout(()=>{ bf.remove(); }, duration * 1000);
+}
+
+for(let i=0;i<5;i++){ setTimeout(createButterfly, i * 3000); }
+setInterval(createButterfly, 6000);
+
+/* ===========================
+   AUDIO SYSTEM
+=========================== */
+const audio = document.getElementById('spiceRebellion');
+const playBtn = document.getElementById('playBtn');
+let isPlaying = false;
+
+function toggleAudio(){
+  if(isPlaying){
+    audio.pause();
+    playBtn.textContent = '▶ PLAY';
+    document.querySelectorAll('.v-bar').forEach(bar=>{
+      bar.classList.remove('active');
+      bar.style.animation = 'none';
+    });
+  }else{
+    audio.play().catch(()=>{});
+    playBtn.textContent = '⏸ PAUSE';
+    document.querySelectorAll('.v-bar').forEach((bar,i)=>{
+      bar.classList.add('active');
+      bar.style.animationDelay = (i * 0.1) + 's';
+    });
+  }
+  isPlaying = !isPlaying;
+}
+
+/* ===========================
+   KONAMI EASTER EGG
+=========================== */
+let konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key === konamiCode[konamiIndex]){
+    konamiIndex++;
+    if(konamiIndex === konamiCode.length){
+      document.body.classList.add('konami-active');
+      document.getElementById('hiddenMessage').classList.add('show');
+      konamiIndex = 0;
+      setTimeout(()=>{ document.body.classList.remove('konami-active'); }, 5000);
+    }
+  }else{
+    konamiIndex = 0;
+  }
+});
+
+/* ===========================
+   RANDOM GLITCH
+=========================== */
+setInterval(()=>{
+  if(Math.random() > 0.95){
+    document.body.style.filter = 'hue-rotate(90deg) saturate(2)';
+    setTimeout(()=>{ document.body.style.filter = 'none'; }, 100);
+  }
+}, 3000);
+
+/* ===========================
+   SCROLL REVEAL
+=========================== */
+const observerOptions = { threshold:0.1, rootMargin:'0px 0px -50px 0px' };
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.card, .memorial-item').forEach(el=>{
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'all 0.6s ease-out';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
+```0
