@@ -22,7 +22,7 @@
         }
 
         /* --- RESET --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; themargin: 0; padding: 0; }
 
         /* --- BODY STYLES --- */
         body {
@@ -390,10 +390,12 @@
         <div class="track-name">SPICY REBELLION.mp3</div>
     </div>
 
-    <audio id="spiceRebellion" loop>
-        <source src="spicy_rebellion.mp3" type="audio/mpeg">
-        <source src="spicy_rebellion_1.mp3" type="audio/mpeg">
+ 
     </audio>
+<audio id="spiceRebellion" loop preload="none">
+  <!-- keep ONLY this source, pointing at the actual file you uploaded -->
+  <source src="spicy_rebellion.mp3" type="audio/mpeg">
+</audio>
 
     <div class="container">
         
