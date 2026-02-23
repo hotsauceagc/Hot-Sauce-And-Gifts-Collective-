@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spicy Rebellion Live Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #05030a;
+      --bg-soft: #0b0715;
+      --neon-pink: #ff3bff;
+      --neon-cyan: #00f5ff;
+      --neon-orange: #ff6a2a;
+      --neon-yellow: #ffe45e;
+      --neon-purple: #b026ff;
+      --neon-green: #00ff41;
+      --neon-red: #ff0033;
+      --text-main: #f5f7ff;
+      --text-soft: #b3b7e6;
+      --border-radius: 18px;
+      --shadow-neon: 0 0 24px rgba(255, 58, 255, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255, 59, 255, 0.16), transparent 55%),
+        radial-gradient(circle at bottom, rgba(0, 245, 255, 0.18), transparent 55%),
+        #020006;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 40px 20px;
+      font-size: 18px;
+    }
+
+    .scanline {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.04),
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      mix-blend-mode: soft-light;
+      opacity: 0.2;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1400px;
+      background: radial-gradient(circle at top left, #140a2a, #050309 55%);
+      border-radius: 24px;
+      padding: 32px 32px 36px;
+      box-shadow:
+        0 0 60px rgba(0, 0, 0, 0.9),
+        0 0 48px rgba(0, 245, 255, 0.2);
+      border: 1px solid rgba(0, 245, 255, 0.18);
+      overflow: hidden;
+    }
+
+    .neon-frame {
+      position: relative;
+      padding: 28px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, #13061c, #040109 60%);
+      box-shadow:
+        0 0 28px rgba(255, 59, 255, 0.45),
+        0 0 42px rgba(0, 245, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .neon-frame::before,
+    .neon-frame::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      border: 2px solid transparent;
+      background:
+        linear-gradient(135deg, var(--neon-orange), var(--neon-cyan))
+        border-box;
+      -webkit-mask:
+        linear-gradient(#000 0 0) padding-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    .neon-frame::after {
+      filter: blur(10px);
+      opacity: 0.45;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .logo-block h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ff6afb, #00f5ff, #ffe45e);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 18px rgba(255, 106, 251, 0.7),
+        0 0 32px rgba(0, 245, 255, 0.7);
+    }
+
+    .logo-block span {
+      font-size: 1rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      display: block;
+      margin-top: 8px;
+    }
+
+    .tag-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 245, 255, 0.55);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+      white-space: nowrap;
+    }
+
+    .subnav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
+    .pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-soft);
+      cursor: pointer;
+      background: radial-gradient(circle at top, #27104a, #05030a);
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
+      transition: all 0.18s ease-out;
+    }
+
+    .pill.active {
+      border-color: var(--neon-pink);
+      color: var(--neon-yellow);
+      box-shadow:
+        0 0 24px rgba(255, 59, 255, 0.8),
+        0 0 32px rgba(0, 245, 255, 0.5);
+    }
+
+    .pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--neon-cyan);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chat-panel,
+    .side-panel {
+      background: radial-gradient(circle at top, #12091f, #05030a 60%);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--neon-cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-title span {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .chat-log {
+      height: 420px;
+      background: radial-gradient(circle at top, #0d041a, #020008 65%);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 1.05rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-log::-webkit-scrollbar {
+      width: 8px;
+    }
+    .chat-log::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, var(--neon-pink), var(--neon-cyan));
+      border-radius: 10px;
+    }
+
+    .chat-message {
+      line-height: 1.45;
+      animation: messageSlide 0.3s ease-out;
+      max-width: 85%;
+    }
+
+    @keyframes messageSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-message.user {
+      align-self: flex-end;
+    }
+
+    .chat-message.ai {
+      align-self: flex-start;
+    }
+
+    .chat-message .meta {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chat-message.user .meta {
+      justify-content: flex-end;
+    }
+
+    .chat-message .bubble {
+      padding: 14px 18px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .chat-message.user .bubble {
+      background: linear-gradient(135deg, #ff6af2, #ffa94d);
+      border-radius: 18px 18px 4px 18px;
+      color: #1a061f;
+      box-shadow:
+        0 0 20px rgba(255, 106, 242, 0.8),
+        0 0 32px rgba(255, 169, 77, 0.7);
+    }
+
+    .chat-message.ai .bubble {
+      background: radial-gradient(circle at top, #0f162c, #040914);
+      border-radius: 18px 18px 18px 4px;
+      border: 1px solid rgba(0, 245, 255, 0.5);
+      color: var(--text-main);
+      box-shadow: 0 0 22px rgba(0, 245, 255, 0.65);
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 14px 18px;
+      background: radial-gradient(circle at top, #0f162c, #040914);
+      border-radius: 18px 18px 18px 4px;
+      border: 1px solid rgba(0, 245, 255, 0.5);
+      align-self: flex-start;
+      width: fit-content;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--neon-cyan);
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out both;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    .input-row {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    textarea {
+      flex: 1;
+      resize: none;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(3, 1, 9, 0.9);
+      color: var(--text-main);
+      padding: 16px 18px;
+      font-size: 1.05rem;
+      outline: none;
+      min-height: 80px;
+      font-family: inherit;
+    }
+
+    textarea:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 22px rgba(0, 245, 255, 0.55);
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 16px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink));
+      color: #15030e;
+      box-shadow:
+        0 0 24px rgba(255, 106, 42, 0.85),
+        0 0 36px rgba(255, 59, 255, 0.75);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+      min-width: 120px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 28px rgba(255, 159, 94, 0.9),
+        0 0 38px rgba(255, 90, 255, 0.9);
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .side-panel p {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--neon-yellow);
+      background: radial-gradient(circle at top, rgba(255, 228, 94, 0.25), #120b1e);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #35ff7a;
+      box-shadow: 0 0 14px rgba(53, 255, 122, 0.9);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    footer {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      text-align: center;
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
+
+    /* ENHANCED COLORFUL TRANSFORMATION BUTTERFLIES */
+    .butterfly {
+      position: absolute;
+      width: 48px;
+      height: 40px;
+      pointer-events: none;
+      transform-origin: center;
+      z-index: 10;
+      filter: drop-shadow(0 0 15px currentColor);
+    }
+
+    .butterfly::before {
+      content: "🦋";
+      font-size: 42px;
+      position: absolute;
+      animation: flutterWings 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px currentColor);
+    }
+
+    /* Different colored butterflies representing transformation stages */
+    .butterfly.cyan { color: var(--neon-cyan); --glow-color: var(--neon-cyan); }
+    .butterfly.pink { color: var(--neon-pink); --glow-color: var(--neon-pink); }
+    .butterfly.yellow { color: var(--neon-yellow); --glow-color: var(--neon-yellow); }
+    .butterfly.orange { color: var(--neon-orange); --glow-color: var(--neon-orange); }
+    .butterfly.purple { color: var(--neon-purple); --glow-color: var(--neon-purple); }
+    .butterfly.green { color: var(--neon-green); --glow-color: var(--neon-green); }
+    .butterfly.red { color: var(--neon-red); --glow-color: var(--neon-red); }
+
+    .butterfly.small { 
+      width: 32px; 
+      height: 28px; 
+    }
+    .butterfly.small::before {
+      font-size: 28px;
+    }
+
+    .butterfly.large { 
+      width: 72px; 
+      height: 60px; 
+    }
+    .butterfly.large::before {
+      font-size: 64px;
+    }
+
+    /* Wall positions */
+    .butterfly.top-left { top: 30px; left: 30px; animation: float1 8s ease-in-out infinite; }
+    .butterfly.top-right { top: 40px; right: 40px; animation: float2 9s ease-in-out infinite; }
+    .butterfly.mid-left { top: 35%; left: 20px; animation: float3 10s ease-in-out infinite; }
+    .butterfly.mid-right { top: 45%; right: 25px; animation: float4 7s ease-in-out infinite; }
+    .butterfly.bottom-left { bottom: 80px; left: 60px; animation: float1 11s ease-in-out infinite; }
+    .butterfly.bottom-right { bottom: 100px; right: 50px; animation: float2 8.5s ease-in-out infinite; }
+    .butterfly.center-left { top: 60%; left: 8%; animation: float3 9.5s ease-in-out infinite; }
+    .butterfly.center-right { top: 25%; right: 15%; animation: float4 10.5s ease-in-out infinite; }
+
+    @keyframes flutterWings {
+      0%, 100% { transform: scaleX(1) rotate(-5deg); }
+      50% { transform: scaleX(0.7) rotate(5deg); }
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(15px, -20px) rotate(5deg); }
+      50% { transform: translate(-10px, -35px) rotate(-3deg); }
+      75% { transform: translate(20px, -15px) rotate(8deg); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(-20px, -25px) rotate(-7deg); }
+      66% { transform: translate(10px, -40px) rotate(4deg); }
+    }
+
+    @keyframes float3 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(25px, -15px) rotate(6deg); }
+      40% { transform: translate(-15px, -30px) rotate(-4deg); }
+      60% { transform: translate(30px, -20px) rotate(8deg); }
+      80% { transform: translate(-10px, -10px) rotate(-2deg); }
+    }
+
+    @keyframes float4 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-18px, -22px) rotate(-6deg); }
+      50% { transform: translate(12px, -38px) rotate(5deg); }
+      75% { transform: translate(-22px, -18px) rotate(-8deg); }
+    }
+
+    /* Online users indicator */
+    .online-users {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .user-avatars {
+      display: flex;
+      margin-left: 8px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+      border: 2px solid var(--bg);
+      margin-left: -10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .user-avatar:first-child { margin-left: 0; }
+
+    /* Reaction buttons */
+    .reactions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .chat-message:hover .reactions {
+      opacity: 1;
+    }
+
+    .reaction-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reaction-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+
+    /* Sound toggle */
+    .sound-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <div class="container neon-frame">
+    <!-- COLORFUL TRANSFORMATION BUTTERFLIES -->
+    <div class="butterfly cyan large top-left"></div>
+    <div class="butterfly pink top-right"></div>
+    <div class="butterfly yellow small mid-left"></div>
+    <div class="butterfly orange mid-right"></div>
+    <div class="butterfly purple bottom-left"></div>
+    <div class="butterfly green bottom-right"></div>
+    <div class="butterfly red small center-left"></div>
+    <div class="butterfly cyan center-right"></div>
+
+    <button class="sound-toggle" id="soundToggle" title="Toggle sound">🔊</button>
+
+    <header>
+      <div class="logo-block">
+        <h1>SPICY REBELLION · LIVE LOUNGE</h1>
+        <span>Cyberpunk peer space · Hot Sauce & Gifts Collective</span>
+      </div>
+      <div class="tag-pill">NEON NO‑JUDGMENT ZONE</div>
+    </header>
+
+    <div class="subnav">
+      <div class="pill active">Shameless Chat</div>
+      <div class="pill">Sauce Vault</div>
+      <div class="pill">Rice & Beans Route</div>
+      <div class="pill">Lore Broadcast</div>
+    </div>
+
+    <main>
+      <!-- ENHANCED CHAT PANEL -->
+      <section class="chat-panel">
+        <div class="panel-title">
+          <div>Room · Confessions & Transformation</div>
+          <span>Anonymous · Be respectful · Bring the heat, not harm</span>
+        </div>
+
+        <div class="online-users">
+          <span class="status-dot"></span>
+          <span id="onlineCount">12 souls vibing</span>
+          <div class="user-avatars">
+            <div class="user-avatar">A</div>
+            <div class="user-avatar">S</div>
+            <div class="user-avatar">R</div>
+            <div class="user-avatar">+9</div>
+          </div>
+        </div>
+
+        <div class="chat-log" id="chatLog">
+          <div class="chat-message ai">
+            <div class="meta">🦋 Spicy AI · now</div>
+            <div class="bubble">
+              Welcome to the neon booth. Like butterflies, we transform here. 
+              Drop a thought, a question, or a confession. I’ll answer like a 
+              friendly bartender with a PhD in hot sauce and healing.
+            </div>
+            <div class="reactions">
+              <button class="reaction-btn">🔥</button>
+              <button class="reaction-btn">💙</button>
+              <button class="reaction-btn">🦋</button>
+            </div>
+          </div>
+        </div>
+
+        <form class="input-row" id="chatForm">
+          <textarea
+            id="chatInput"
+            placeholder="Type your confession, question, or transformation story here... 🦋"
+          ></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+
+      <!-- SIDE PANEL -->
+      <aside class="side-panel">
+        <div class="panel-title">
+          <div>About this room</div>
+          <span>Read this before you spill.</span>
+        </div>
+        <p>
+         Welcome to Shameless Confessions: Spill Your Gutz 🌶️
+A no-judgment space where you can say what you can't say anywhere else.
+No sermons. No fake perfection. Just real people and real stories.
+Keep it spicy. Keep it respectful. Keep it human.
+        </p>
+        <p>
+          We keep it spicy but human. No hate, no harassment, no medical or legal
+          advice—just stories, questions, and ideas passed around like hot sauce.
+        </p>
+        <p>
+          Think: transformation like a neon
+          <strong>butterfly</strong> on a brick wall—still the same you, just
+          brighter and braver. Each color represents a stage of your journey.
+        </p>
+
+        <div style="margin-top: 16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="status-chip">
+            <div class="status-dot"></div>
+            Live · 12 online
+          </div>
+          <div class="status-chip" style="border-color:rgba(255,59,255,0.7);">
+            🌶 Spicy, not cruel
+          </div>
+          <div class="status-chip" style="border-color:rgba(0,245,255,0.7); color:var(--neon-cyan);">
+            🦋 Transform freely
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      EST. 2026 · Spicy Rebellion · Cyberpunk peer space · Messages fade like butterflies after 24h
+    </footer>
+  </div>
+
+  <script>
+    // ENHANCED LIVE CHAT SYSTEM
+    const form = document.getElementById("chatForm");
+    const input = document.getElementById("chatInput");
+    const log = document.getElementById("chatLog");
+    const soundToggle = document.getElementById("soundToggle");
+    let soundEnabled = true;
+    let messageCount = 0;
+
+    // Sound effects (using Web Audio API for beeps)
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playSound(type) {
+      if (!soundEnabled) return;
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      if (type === 'send') {
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
+      } else if (type === 'receive') {
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.15);
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.15);
+      }
+    }
+
+    soundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+    });
+
+    function showTypingIndicator() {
+      const typing = document.createElement("div");
+      typing.className = "typing-indicator";
+      typing.id = "typingIndicator";
+      typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+      log.appendChild(typing);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const typing = document.getElementById("typingIndicator");
+      if (typing) typing.remove();
+    }
+
+    function addMessage(text, type = "user") {
+      if (!text.trim()) return;
+      
+      removeTypingIndicator();
+      
+      const wrapper = document.createElement("div");
+      wrapper.className = "chat-message " + type;
+
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      const time = new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+      meta.textContent = (type === "user" ? "You" : "🦋 Spicy AI") + " · " + time;
+      
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.textContent = text;
+
+      const reactions = document.createElement("div");
+      reactions.className = "reactions";
+      reactions.innerHTML = `
+        <button class="reaction-btn" onclick="this.style.transform='scale(1.2)'; setTimeout(()=>this.style.transform='scale(1)',200)">🔥</button>
+        <button class="reaction-btn">💙</button>
+        <button class="reaction-btn">🦋</button>
+        <button class="reaction-btn">🙏</button>
+      `;
+
+      wrapper.appendChild(meta);
+      wrapper.appendChild(bubble);
+      wrapper.appendChild(reactions);
+      log.appendChild(wrapper);
+      log.scrollTop = log.scrollHeight;
+      
+      messageCount++;
+      playSound(type === 'user' ? 'send' : 'receive');
+    }
+
+    function fakeAIReply(userText) {
+      const lower = userText.toLowerCase();
+      let reply = "Noted. Consider this officially logged in the neon archives of the Spicy Rebellion. 🦋";
+      
+      const responses = [
+        { keywords: ["tired", "exhausted", "burnout"], 
+          reply: "Being tired and still caring is a revolutionary act. Hydrate, eat something warm, and remember you're not a machine. Even butterflies rest in their cocoons. 🦋" },
+        { keywords: ["hot sauce", "spicy", "heat"], 
+          reply: "Every problem is at least 3% easier with the right hot sauce. What flavor does this situation need—sweet, smoky, or scorched earth? 🔥" },
+        { keywords: ["love", "heart", "crush"], 
+          reply: "Love is the original risky condiment. Messy, staining, unforgettable. Thanks for trusting this room with it. 💙" },
+        { keywords: ["transform", "change", "growth", "butterfly"], 
+          reply: "Transformation isn't about becoming someone new—it's about growing into who you've always been. Like a butterfly, you carry the pattern within. 🦋✨" },
+        { keywords: ["sad", "depressed", "lonely"], 
+          reply: "The dark cocoon feels isolating, but it's where wings form. You're not alone here. This room holds space for you. 🦋" },
+        { keywords: ["help", "advice", "what should"], 
+          reply: "I can't give medical or legal advice, but I can say: trust your gut. It's spicy for a reason. What does your intuition whisper? 🌶️" }
+      ];
+
+      for (let r of responses) {
+        if (r.keywords.some(k => lower.includes(k))) {
+          reply = r.reply;
+          break;
+        }
+      }
+
+      // Random transformation encouragement
+      const encouragements = [
+        "Remember: every butterfly was once a caterpillar who refused to give up.",
+        "Your transformation is in progress. Be patient with the process.",
+        "Like neon through cracks—your light finds a way."
+      ];
+      
+      if (Math.random() > 0.7) {
+        reply += " " + encouragements[Math.floor(Math.random() * encouragements.length)];
+      }
+
+      addMessage(reply, "ai");
+    }
+
+    // Simulate other users
+    const fakeUsers = ["PhoenixRising", "SauceBoss", "CocoonQueen", "NeonWings"];
+    const fakeMessages = [
+      "Just poured my heart out to a stranger. Feels scary but freeing. 🦋",
+      "Day 3 of my transformation. Hard but worth it.",
+      "Anyone else feel like they're breaking open to become something new?",
+      "This room is my safe space. Thank you all.",
+      "Sending love to everyone healing tonight. 💙"
+    ];
+
+    function simulateUser() {
+      if (Math.random() > 0.7 && messageCount > 2) {
+        setTimeout(() => {
+          showTypingIndicator();
+          setTimeout(() => {
+            removeTypingIndicator();
+            const user = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
+            const msg = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
+            
+            const wrapper = document.createElement("div");
+            wrapper.className = "chat-message ai";
+            wrapper.style.opacity = "0.8";
+            
+            const meta = document.createElement("div");
+            meta.className = "meta";
+            meta.textContent = "🦋 " + user + " · " + new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+            
+            const bubble = document.createElement("div");
+            bubble.className = "bubble";
+            bubble.textContent = msg;
+            
+            wrapper.appendChild(meta);
+            wrapper.appendChild(bubble);
+            log.appendChild(wrapper);
+            log.scrollTop = log.scrollHeight;
+            playSound('receive');
+          }, 1500);
+        }, 3000);
+      }
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = input.value;
+      addMessage(text, "user");
+      input.value = "";
+      
+      showTypingIndicator();
+      setTimeout(() => {
+        fakeAIReply(text);
+        simulateUser();
+      }, 1200 + Math.random() * 800);
+    });
+
+    // Enter key to send (Shift+Enter for new line)
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        form.dispatchEvent(new Event("submit"));
+      }
+    });
+
+    // Update online count randomly
+    setInterval(() => {
+      const count = 10 + Math.floor(Math.random() * 8);
+      document.getElementById("onlineCount").textContent = count + " souls vibing";
+    }, 30000);
+  </script>
+</body>
+</html>
