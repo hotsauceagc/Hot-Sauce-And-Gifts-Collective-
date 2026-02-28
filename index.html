@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.M.A.S. Tactical Database</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-red: #ff003c;
+            --neon-purple: #bc13fe;
+            --bg-color: #0b0b1a;
+            --panel-bg: #11112b;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 2rem;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .panel {
+            background-color: var(--panel-bg);
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+        }
+        /* Faction Colors */
+        .panel:nth-child(1)::before { background: var(--neon-blue); }
+        .panel:nth-child(2)::before { background: #ffd700; /* Mustard Gold */ }
+        .panel:nth-child(3)::before { background: var(--neon-red); }
+        .panel:nth-child(4)::before { background: var(--neon-purple); }
+        .panel:nth-child(5)::before { background: #ff4500; /* Fire Orange */ }
+        .panel:nth-child(6)::before { background: #32cd32; /* Pepper Green */ }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .panel:nth-child(1):hover { box-shadow: 0 0 15px var(--neon-blue); border-color: var(--neon-blue); }
+        .panel:nth-child(2):hover { box-shadow: 0 0 15px #ffd700; border-color: #ffd700; }
+        .panel:nth-child(3):hover { box-shadow: 0 0 15px var(--neon-red); border-color: var(--neon-red); }
+        .panel:nth-child(4):hover { box-shadow: 0 0 15px var(--neon-purple); border-color: var(--neon-purple); }
+        .panel:nth-child(5):hover { box-shadow: 0 0 15px #ff4500; border-color: #ff4500; }
+        .panel:nth-child(6):hover { box-shadow: 0 0 15px #32cd32; border-color: #32cd32; }
+
+        .panel h2 {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+        .panel p {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Spicy Rebellion: Intelligence Hub</h1>
+
+    <div class="grid-container">
+        <div class="panel">
+            <h2>S.M.A.S.</h2>
+            <p>Sinclair Monroe Analyst Systems. The elite tactical core led by Imani Sinclair. Southern grace meets high-tech surveillance.</p>
+        </div>
+        <div class="panel">
+            <h2>Mustard Dynasty</h2>
+            <p>Led by Elias and Julian Mustard. Agricultural roots masking a massive, dark-web cybernetics and bootlegging empire.</p>
+        </div>
+        <div class="panel">
+            <h2>Good Girls Gone Bad</h2>
+            <p>Blue Monroe's division. Platinum hair, red latex, and synthetic bionic supremacy. When the system fails, they rewrite the rules.</p>
+        </div>
+        <div class="panel">
+            <h2>Shannon Too Hot & The Bootleggers</h2>
+            <p>High-speed smuggling and heavy firepower. Running the neon-lit supply routes while keeping the heat off S.M.A.S.</p>
+        </div>
+        <div class="panel">
+            <h2>Cynthia Fire</h2>
+            <p>Explosives, distractions, and pure heat. If a perimeter needs to be breached or a Mustard drone melted, she's the call.</p>
+        </div>
+        <div class="panel">
+            <h2>Tamika Two Peppers</h2>
+            <p>The Chef. Master of the Tactical Taco Truck. Blends culinary perfection with chemical precision. Her spice levels are weaponized.</p>
+        </div>
+    </div>
+
+</body>
+</html>
