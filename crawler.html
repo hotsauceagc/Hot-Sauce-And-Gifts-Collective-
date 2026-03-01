@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASSIFIED // MUSTARD DYNASTY</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-color: #07050A; --neon-pink: #FF007A; --holo-blue: #00f3ff; 
+            --cherry-red: #ff0033; --matrix-green: #00ff41; --alert-orange: #ff9900; 
+            --text-chrome: #e0e0e0; --mustard-gold: #d4af37;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-chrome); font-family: 'Share Tech Mono', monospace; padding: 20px; background-image: radial-gradient(circle at 50% 50%, #110d05 0%, #07050A 80%); min-height: 100vh; }
+        .lore-container { max-width: 800px; margin: 0 auto; border-left: 2px solid var(--mustard-gold); padding-left: 20px; }
+        
+        .header-glitch { font-family: 'Orbitron', sans-serif; color: var(--mustard-gold); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+        
+        .brief-header { color: #888; font-size: 0.9rem; margin-bottom: 40px; border: 1px dashed var(--mustard-gold); padding: 15px; background: rgba(0,0,0,0.8); }
+        .brief-header strong { color: var(--mustard-gold); }
+
+        .intel-block { background: rgba(10, 10, 10, 0.9); border: 1px solid #222; margin-bottom: 40px; padding: 25px; position: relative; transition: 0.3s; }
+        .intel-block:hover { border-color: var(--mustard-gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+        .intel-block::before { content: "DECRYPTED ARCHIVE"; position: absolute; top: -10px; left: 15px; background: var(--bg-color); color: var(--mustard-gold); padding: 0 10px; font-size: 0.8rem; letter-spacing: 2px; }
+        
+        .intel-img { width: 100%; height: auto; border-bottom: 2px solid var(--mustard-gold); margin-bottom: 20px; filter: sepia(0.3) contrast(1.1) brightness(0.9); }
+        
+        .intel-title { color: var(--mustard-gold); font-family: 'VT323', monospace; font-size: 2rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .intel-text { line-height: 1.7; color: #ccc; font-size: 1.05rem; margin-bottom: 15px; }
+        .intel-text strong { color: #fff; }
+        
+        ul { list-style-type: square; margin-left: 20px; margin-bottom: 15px; color: #aaa; }
+        li { margin-bottom: 5px; }
+
+        .doctrine-block { text-align: center; border: 1px solid var(--cherry-red); padding: 30px; background: rgba(255, 0, 51, 0.05); margin-top: 50px; }
+        .doctrine-title { color: var(--cherry-red); font-family: 'Orbitron', sans-serif; font-size: 1.5rem; margin-bottom: 20px; text-shadow: 0 0 10px var(--cherry-red); }
+        .doctrine-list { list-style: none; margin: 0; padding: 0; font-family: 'VT323', monospace; font-size: 1.5rem; color: var(--text-chrome); line-height: 2; }
+        .doctrine-list li::before { content: ">> "; color: var(--cherry-red); }
+
+        .btn { padding: 10px 20px; border: 1px solid var(--holo-blue); color: var(--holo-blue); text-decoration: none; text-transform: uppercase; display: inline-block; margin-bottom: 30px; transition: 0.3s; }
+        .btn:hover { background: var(--holo-blue); color: #000; box-shadow: 0 0 15px var(--holo-blue); }
+    </style>
+</head>
+<body>
+
+    <div class="lore-container">
+        
+        <a href="index.html" class="btn">◄ RETURN TO TERMINAL</a>
+        
+        <h1 class="header-glitch">MUSTARD DYNASTY // CONTINUITY FILE</h1>
+
+        <div class="brief-header">
+            <strong>CLASSIFICATION:</strong> Internal Archive<br>
+            <strong>AUDIENCE:</strong> Command Structure / Strategic Leadership<br>
+            <strong>SUBJECT:</strong> The Generational Evolution of the Mustard Empire
+        </div>
+
+        <div class="intel-block">
+            <h2 class="intel-title">01. ORIGIN ROOT: PRE-ELIJAH ERA</h2>
+            <p class="intel-text">The Mustard legacy did not begin with Elijah. The land itself predates him. Elijah Mustard inherited the original coastal Lowcountry farm from his father, a disciplined and resourceful Gullah Geechee landholder who secured acreage in the aftermath of Reconstruction.</p>
+            <p class="intel-text">Rarely recorded in formal documents, the family archive refers to him simply as <strong>"The First Holder."</strong> He believed land was protection, memory, and leverage. He purchased and protected the original farmland during a period of instability, racial violence, and economic sabotage. By the time Elijah inherited the estate, the foundation was secure but fragile.</p>
+            <p class="intel-text" style="color: var(--mustard-gold); font-style: italic;">Core Doctrine: "Never sell land. Expand when others retreat."</p>
+        </div>
+
+        <div class="intel-block">
+            <img src="elijah-sign.jpg" alt="Elijah Mustard at the Estate" class="intel-img">
+            <h2 class="intel-title">02. ELIJAH MUSTARD: THE REGENERATOR</h2>
+            <p class="intel-text">Operating in the 1930s, Elijah inherited the coastal farm and expanded it into a 250-acre diversified agricultural estate in South Carolina’s Lowcountry. He was not publicly confrontational; his strength was patience, intelligence, and ruthless negotiation.</p>
+            <ul>
+                <li>Soil regeneration and integrated livestock systems</li>
+                <li>Mustard greens and mustard seed as specialty crops</li>
+                <li>Strategic land acquisition during the Great Depression</li>
+                <li>Quiet alliances with Black farmers and early land trust structures</li>
+            </ul>
+        </div>
+
+        <div class="intel-block">
+            <img src="elijah-soil.jpg" alt="Elijah Working the Soil" class="intel-img">
+            <h2 class="intel-title">03. POST-WAR CONSOLIDATION</h2>
+            <p class="intel-text">After World War II, Elijah’s children modernized operations. They focused on the absolute protection of land and diversification of revenue. Through mechanization, irrigation improvements, and cooperative purchasing power, this generation survived systemic pressures that destroyed many Black farms of the era.</p>
+        </div>
+
+        <div class="intel-block">
+            <h2 class="intel-title">04. SCIENCE & EDUCATION SHIFT</h2>
+            <p class="intel-text">Spanning the 1960s to 1980s, the Mustards shifted their strategy from land alone to <strong>knowledge</strong>. They recognized future threats would not only be physical but technological. The family prioritized university education, plant biology, soil chemistry, and early exposure to computing.</p>
+            <p class="intel-text">By the 1990s, they had expanded into biotechnology, food systems research, and early cybersecurity. The farm ceased to be just a farm; it became a legacy research site.</p>
+        </div>
+
+        <div class="intel-block">
+            <h2 class="intel-title">05. JULIAN MUSTARD: THE SYNTHESIS</h2>
+            <p class="intel-text">Julian Mustard represents the terrifying convergence of land, science, and digital power. Educated in Computer Science, Biology, and Cybersecurity, Julian views agriculture as the next global power frontier. He does not view the farm as property, but as a laboratory, a memory system, and a strategic asset.</p>
+            <p class="intel-text">His focus on synthetic crop systems, secure supply chains, and defensive technology against corporate control has made him an apex predator. He is weaponizing his family's survival history to initiate a complete corporate takeover of the capital.</p>
+        </div>
+
+        <div class="doctrine-block">
+            <h2 class="doctrine-title">S.M.A.S. INTERCEPT: DYNASTIC DOCTRINE</h2>
+            <p style="color: #aaa; margin-bottom: 15px;">The guiding principles of the Mustard family. They operate quietly, rarely seeking attention, but shaping systems over time.</p>
+            <ul class="doctrine-list">
+                <li>LAND IS SOVEREIGNTY.</li>
+                <li>KNOWLEDGE IS LEVERAGE.</li>
+                <li>PATIENCE DEFEATS FORCE.</li>
+                <li>INNOVATION PROTECTS LEGACY.</li>
+                <li>FOOD IS POWER.</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="index.html" class="btn" style="border-color: #555; color: #ccc;">◄ RETURN TO TERMINAL</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
