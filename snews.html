@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNEWS NETWORK // LIVE WIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-color: #07050A; --neon-pink: #FF007A; --holo-blue: #00f3ff; 
+            --cherry-red: #ff0033; --matrix-green: #00ff41; --alert-orange: #ff9900; 
+            --text-chrome: #e0e0e0; 
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-chrome); font-family: 'Share Tech Mono', monospace; padding: 20px; min-height: 100vh; }
+        
+        .container { max-width: 900px; margin: 0 auto; background: rgba(10, 10, 10, 0.9); border: 2px solid #333; position: relative; }
+        
+        /* --- HEADER & TICKER --- */
+        .snews-header { background: #000; border-bottom: 2px solid var(--cherry-red); padding: 20px; text-align: center; }
+        .snews-logo { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #fff; text-shadow: -2px 0 var(--holo-blue), 2px 0 var(--cherry-red); letter-spacing: 2px; margin-bottom: 5px; }
+        .snews-tagline { color: var(--matrix-green); font-family: 'VT323', monospace; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 3px; }
+        
+        .ticker-wrap { width: 100%; background-color: var(--cherry-red); overflow: hidden; padding: 5px 0; border-bottom: 1px solid #000; }
+        .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation-iteration-count: infinite; animation-timing-function: linear; animation-name: ticker; animation-duration: 20s; }
+        .ticker__item { display: inline-block; padding: 0 2rem; font-size: 1rem; color: #000; font-weight: bold; text-transform: uppercase; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* --- NEWS FEED --- */
+        .feed-container { padding: 30px; }
+        .article-card { background: #111; border: 1px solid #222; margin-bottom: 30px; padding: 25px; transition: 0.3s; border-left: 4px solid var(--matrix-green); }
+        .article-card:hover { border-color: #444; box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); }
+        .article-card.satire { border-left-color: var(--alert-orange); }
+
+        .meta-data { display: flex; justify-content: space-between; color: #888; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase; border-bottom: 1px dashed #333; padding-bottom: 5px; }
+        .headline { font-family: 'VT323', monospace; font-size: 2.2rem; color: var(--text-chrome); margin-bottom: 15px; text-transform: uppercase; line-height: 1.1; }
+        .headline span { color: var(--matrix-green); }
+        .satire .headline span { color: var(--alert-orange); }
+        
+        .article-body { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
+        .article-body p { margin-bottom: 15px; }
+        .article-body strong { color: #fff; }
+
+        .btn { padding: 12px 25px; border: 1px solid var(--holo-blue); color: var(--holo-blue); text-decoration: none; text-transform: uppercase; font-weight: bold; transition: 0.3s; display: inline-block; margin-top: 10px; font-size: 1rem; }
+        .btn:hover { background: var(--holo-blue); color: #000; box-shadow: 0 0 15px var(--holo-blue); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="snews-header">
+            <h1 class="snews-logo">SNEWS NETWORK</h1>
+            <div class="snews-tagline">SATIRE & POLITICAL INTEL // UNFILTERED TRUTH</div>
+        </header>
+
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <div class="ticker__item">🚨 SYNCOR DRONE ACTIVITY REPORTED IN SECTOR 4 🚨</div>
+                <div class="ticker__item">BUY MORE SAUCE. FUND THE REBELLION.</div>
+                <div class="ticker__item">🚨 JULIAN MUSTARD DECLINES COMMENT ON "YELLOWJACKET" FLEET 🚨</div>
+                <div class="ticker__item">SHANNON "TOO HOT" SINCLAIR ANNOUNCES NEW BATCH DROPPING SOON.</div>
+            </div>
+        </div>
+
+        <div class="feed-container">
+            
+            <article class="article-card">
+                <div class="meta-data">
+                    <span>REPORTER: SHADOW-BROKER DESK</span>
+                    <span>TIMESTAMP: 23:45 EST // ENCRYPTED</span>
+                </div>
+                <h2 class="headline"><span>[BREAKING]</span> OPERATION MIDNIGHT SCORCH SECURES THE BAG IN SECTOR 4</h2>
+                <div class="article-body">
+                    <p><strong>WASHINGTON D.C. —</strong> While S.M.A.S. Intelligence Chief Blue Monroe was distracted at the Tech Valley Gala, the heavy lifters of the Spicy Rebellion were out securing the capital.</p>
+                    <p>Sources confirm Shannon "Too Hot" Sinclair secured a highly lucrative, off-the-grid catering contract for an illegal hover-car street race in Sector 4. The order? 500 bottles of the Secret Recipe, plus 200 pounds of Marcus's famous dry-rub wings. The payout was enough crypto to fund the rebellion's safe house operations for a month.</p>
+                    <p>The problem? Syncor initiated a surprise "security lockdown," deploying automated toll-drones to tax and scan every vehicle entering the zone. Fortunately, Jax "Nitro" Vance was behind the wheel of the Tactical Taco Truck. Executing a high-speed blockade run through the neon slums, Jax completely bypassed the drone net.</p>
+                    <p>Meanwhile, Marcus "Payload" Stone ran anti-air defense from the back, retrofitting a commercial BBQ smoker to act as a localized EMP cannon. He successfully smoked out three Syncor drones while keeping the wings perfectly warm. The drop was made. The crypto was secured. The Mustard Dynasty remains oblivious.</p>
+                </div>
+            </article>
+
+            <article class="article-card satire">
+                <div class="meta-data">
+                    <span>CATEGORY: POLITICAL SATIRE</span>
+                    <span>TIMESTAMP: 08:15 EST // OP-ED</span>
+                </div>
+                <h2 class="headline"><span>[POLITICS]</span> MUSTARD DYNASTY LOBBIES TO CLASSIFY "SPICY REBELLION" AS BIO-HAZARD</h2>
+                <div class="article-body">
+                    <p><strong>CAPITOL HILL —</strong> In a desperate bid to maintain their monopoly on synthetic agriculture, Mustard Tech Systems CEO Julian Mustard has reportedly lobbied the city council to classify the Spicy Rebellion Hot Sauce as a "Class-4 Biological Weapon."</p>
+                    <p>"It’s simply too hot for the general public," a Syncor spokesperson lied to reporters yesterday. "We believe the Sinclair family is using an unauthorized, organic pepper blend that causes spontaneous coughing, sweating, and an uncontrollable urge to dance. It must be regulated immediately."</p>
+                    <p>SNEWS Network reached out to Silas "The Vault" for comment. He simply laughed, adjusted his chili pepper lapel pin, and stated: "Syncor’s food tastes like motherboard plastic. They aren't afraid of the heat; they're afraid of the flavor. Tell Julian to cry about it."</p>
+                </div>
+                <a href="https://whatchuthink.redbubble.com" target="_blank" class="btn" style="border-color: var(--alert-orange); color: var(--alert-orange);">🛒 PROVE THEM WRONG. BUY THE SAUCE.</a>
+            </article>
+
+            <div style="text-align: center; margin-top: 40px; border-top: 1px solid #333; padding-top: 30px;">
+                <a href="index.html" class="btn" style="border-color: #555; color: #ccc;">◄ RETURN TO TERMINAL</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
