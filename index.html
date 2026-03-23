@@ -5,151 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hot Sauce And Gifts Collective 🌶️🎁🧡</title>
     <style>
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
         :root {
             --neon-green: #39FF14;
             --rebel-red: #FF0000;
-            --deep-black: #0D0D0D;
-            --brand-orange: #FF8C00; 
+            --brand-orange: #FF8C00;
+            --deep-black: #050505;
         }
 
         body {
-            margin: 0;
-            padding: 0;
             background-color: var(--deep-black);
-            color: #FFFFFF;
+            color: var(--brand-orange);
             font-family: 'Courier New', Courier, monospace;
-            overflow-x: hidden;
-            line-height: 1.5;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
         }
 
-        /* Video Layer: High-Contrast Background */
-        .video-container {
+        /* THE GUILLOTINE PROTOCOL */
+        .video-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            filter: brightness(18%) contrast(250%) grayscale(100%) sepia(0.3);
+            opacity: 0.8;
+        }
+
+        .overlay-mask {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: #000; /* Fallback */
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                        repeating-linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 5px 100%;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(30%) contrast(110%);
-        }
-
-        /* UI Layer */
-        .interface-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .terminal-box {
-            background: rgba(13, 13, 13, 0.95);
-            border: 2px solid var(--brand-orange);
-            max-width: 800px;
-            width: 100%;
-            padding: 40px;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.15);
+        .rebel-interface {
             position: relative;
+            z-index: 10;
+            padding: 40px;
+            border: 5px solid var(--brand-orange);
+            background: rgba(5, 5, 5, 0.85);
+            max-width: 850px;
+            margin: 10vh auto;
+            box-shadow: 0 0 40px var(--rebel-red), inset 0 0 20px rgba(255, 140, 0, 0.2);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 95% 100%, 0% 100%);
         }
 
-        .header-main {
-            color: var(--brand-orange);
-            font-size: 1.8rem;
+        h1 {
+            color: var(--rebel-red);
+            font-size: 3rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 0 0 20px 0;
-            border-bottom: 2px solid var(--rebel-red);
-            padding-bottom: 10px;
-            display: block;
+            text-align: center;
+            letter-spacing: -3px;
+            margin: 0;
+            animation: glitch 0.5s infinite;
+            border-bottom: 2px solid var(--neon-green);
         }
 
-        .sys-log {
+        .status-header {
             color: var(--neon-green);
-            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 30px;
-            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
-        .mission-brief {
+        .mission-text {
+            border: 1px dashed var(--neon-green);
+            padding: 20px;
             margin: 20px 0;
-            font-size: 1.1rem;
-            border-left: 3px solid var(--brand-orange);
-            padding-left: 20px;
+            background: rgba(57, 255, 20, 0.03);
+            font-size: 1.2rem;
         }
 
-        /* Navigation Grid */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
             gap: 15px;
             margin-top: 40px;
         }
 
-        .nav-item {
-            border: 1px solid var(--brand-orange);
+        .rebel-btn {
+            flex: 1;
+            border: 2px solid var(--brand-orange);
+            background: transparent;
             color: var(--brand-orange);
-            padding: 15px;
+            padding: 20px;
             text-decoration: none;
             text-align: center;
             font-weight: bold;
-            transition: all 0.3s ease;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        .nav-item:hover {
+        .rebel-btn:hover {
             background: var(--brand-orange);
             color: var(--deep-black);
-            box-shadow: 0 0 15px var(--brand-orange);
+            box-shadow: 0 0 30px var(--brand-orange);
         }
 
-        .footer-tag {
-            margin-top: 50px;
+        footer {
+            text-align: right;
             font-size: 0.7rem;
-            color: #555;
-            text-align: center;
-            letter-spacing: 1px;
+            margin-top: 20px;
+            color: var(--neon-green);
         }
     </style>
 </head>
 <body>
 
-    <div class="video-container">
-        <video autoplay muted loop playsinline>
-            <source src="background.mp4" type="video/mp4">
-        </video>
-    </div>
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="guillotine.mp4" type="video/mp4">
+    </video>
 
-    <div class="interface-wrapper">
-        <div class="terminal-box">
-            <div class="sys-log">
-                [ AUTHENTICATED: COMMANDER JAY ]<br>
-                [ NODES: ACTIVE ] [ YEAR: 2026 ]
-            </div>
+    <div class="overlay-mask"></div>
 
-            <h1 class="header-main">Hot Sauce And Gifts Collective 🌶️🎁🧡</h1>
-
-            <div class="mission-brief">
-                <p>> OBJECTIVE: High-voltage hot sauce, political satire, and wearable art.</p>
-                <p>> STATUS: Recruiting AI Collaborative Artists and Spicy Rebels.</p>
-            </div>
-
-            <nav class="nav-grid">
-                <a href="shop.html" class="nav-item">Access Merch</a>
-                <a href="lore.html" class="nav-item">Lore Archive</a>
-                <a href="collab.html" class="nav-item">Join Rebellion</a>
-            </nav>
-
-            <div class="footer-tag">
-                SPICY REBELLION // TECHNICAL OPS: THE LIEUTENANT // 2026
-            </div>
+    <div class="rebel-interface">
+        <div class="status-header">
+            <span>[ SYSTEM: SPICY REBELLION ]</span>
+            <span>[ AUTH: COMMANDER JAY ]</span>
         </div>
+        
+        <h1>Hot Sauce And Gifts Collective 🌶️🎁🧡</h1>
+
+        <div class="mission-text">
+            <p>> [OBJECTIVE]: DISRUPT THE MUNDANE.</p>
+            <p>> [PRODUCT]: HIGH-VOLTAGE SAUCE & PHYSICAL MEMES.</p>
+            <p>> [INTAKE]: RECRUITING AI COLLAB ARTISTS.</p>
+        </div>
+
+        <nav class="nav-links">
+            <a href="shop.html" class="rebel-btn">Infiltrate Shop</a>
+            <a href="lore.html" class="rebel-btn">The Archive</a>
+            <a href="collab.html" class="rebel-btn">Recruitment</a>
+        </nav>
+
+        <footer>
+            PRODUCED BY THE COLLECTIVE // 2026 // EST. DC-MD
+        </footer>
     </div>
 
 </body>
