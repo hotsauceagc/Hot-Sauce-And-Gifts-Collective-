@@ -1,0 +1,204 @@
+<!doctype html>
+
+<html lang="en">  
+<head>  
+  <meta charset="utf-8">  
+  <meta name="viewport" content="width=device-width,initial-scale=1">  
+  <title>AETLAS Console</title>  
+  <style>  
+    :root{  
+      --bg:#0b0b0f;  
+      --panel:#15151d;  
+      --line:#2a2a36;  
+      --text:#f2f2f5;  
+      --muted:#b7b7c2;  
+      --accent:#ff5a5f;  
+      --accent-hover:#ff7276;  
+      --success:#22c55e;  
+    }  * { box-sizing:border-box; }  
+
+body{  
+  margin:0;  
+  font-family:Arial, Helvetica, sans-serif;  
+  background:linear-gradient(180deg,#0b0b0f,#111119);  
+  color:var(--text);  
+}  
+
+.wrap{  
+  max-width:1100px;  
+  margin:0 auto;  
+  padding:24px;  
+}  
+
+h1{  
+  margin:0 0 10px;  
+  font-size:2rem;  
+}  
+
+.sub{  
+  color:var(--muted);  
+  margin:0 0 24px;  
+}  
+
+.grid{  
+  display:grid;  
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));  
+  gap:16px;  
+}  
+
+.card{  
+  background:var(--panel);  
+  border:1px solid var(--line);  
+  border-radius:16px;  
+  padding:16px;  
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);  
+}  
+
+h2{  
+  margin:0 0 10px;  
+  font-size:1.1rem;  
+}  
+
+textarea{  
+  width:100%;  
+  min-height:140px;  
+  background:#0f0f15;  
+  color:var(--text);  
+  border:1px solid var(--line);  
+  border-radius:12px;  
+  padding:12px;  
+  resize:vertical;  
+  font:inherit;  
+}  
+
+input{  
+  width:100%;  
+  background:#0f0f15;  
+  color:var(--text);  
+  border:1px solid var(--line);  
+  border-radius:12px;  
+  padding:10px 12px;  
+  margin-bottom:10px;  
+  font:inherit;  
+}  
+
+textarea:focus,  
+input:focus{  
+  outline:2px solid var(--accent);  
+  border-color:var(--accent);  
+}  
+
+button{  
+  background:var(--accent);  
+  color:white;  
+  border:none;  
+  border-radius:999px;  
+  padding:10px 14px;  
+  cursor:pointer;  
+  margin-top:10px;  
+  font:inherit;  
+  transition:background 0.2s ease, transform 0.1s ease;  
+}  
+
+button:hover{  
+  background:var(--accent-hover);  
+}  
+
+button:active{  
+  transform:scale(0.98);  
+}  
+
+ul{  
+  padding-left:18px;  
+  color:var(--muted);  
+}  
+
+.muted{  
+  color:var(--muted);  
+}  
+
+.status{  
+  margin-top:10px;  
+  font-size:0.9rem;  
+  color:var(--success);  
+  min-height:1.2em;  
+}  
+
+@media (max-width: 640px){  
+  .wrap{  
+    padding:16px;  
+  }  
+}
+
+  </style>  
+</head>  
+<body>  
+  <div class="wrap">  
+    <h1>AETLAS Console</h1>  
+    <p class="sub">A simple workspace for prompts, character continuity, and project notes.</p>  <div class="grid">  
+  <section class="card">  
+    <h2>Quick Prompt</h2>  
+    <textarea id="promptBox">Use previous image as reference. Do not change identity, lighting, or composition.</textarea>  
+    <button type="button" data-copy-target="promptBox">Copy Prompt</button>  
+    <div class="status" id="status-promptBox"></div>  
+  </section>  
+
+  <section class="card">  
+    <h2>Character Lock</h2>  
+    <input id="charName" value="Blue Monroe">  
+    <textarea id="charNotes">African American woman, rich brown skin, platinum braids, calm expression, continuity locked.</textarea>  
+    <button type="button" data-copy-target="charNotes">Copy Character Notes</button>  
+    <div class="status" id="status-charNotes"></div>  
+  </section>  
+
+  <section class="card">  
+    <h2>Scene Notes</h2>  
+    <textarea id="sceneNotes">Cyberpunk dining room, long table for 8, florist-quality spring centerpiece, wall text: “They’ll Be No Hugs Here!” 💋</textarea>  
+    <button type="button" data-copy-target="sceneNotes">Copy Scene Notes</button>  
+    <div class="status" id="status-sceneNotes"></div>  
+  </section>  
+
+  <section class="card">  
+    <h2>Project Checklist</h2>  
+    <ul>  
+      <li>Generate master reference frame</li>  
+      <li>Lock character continuity</li>  
+      <li>Create storyboard shots</li>  
+      <li>Upload to GitHub or Netlify</li>  
+    </ul>  
+    <p class="muted">Keep one source of truth for every project.</p>  
+  </section>  
+</div>
+
+  </div>    <script>  
+    async function copyText(id) {  
+      const el = document.getElementById(id);  
+      const status = document.getElementById(`status-${id}`);  
+      const text = el.value;  
+  
+      try {  
+        await navigator.clipboard.writeText(text);  
+        status.textContent = 'Copied successfully.';  
+      } catch (err) {  
+        try {  
+          el.select();  
+          el.setSelectionRange(0, 99999);  
+          const successful = document.execCommand('copy');  
+          status.textContent = successful ? 'Copied successfully.' : 'Copy failed. Please copy manually.';  
+        } catch (fallbackErr) {  
+          status.textContent = 'Copy failed. Please copy manually.';  
+        }  
+      }  
+  
+      setTimeout(() => {  
+        status.textContent = '';  
+      }, 2500);  
+    }  
+  
+    document.querySelectorAll('[data-copy-target]').forEach(button => {  
+      button.addEventListener('click', () => {  
+        copyText(button.dataset.copyTarget);  
+      });  
+    });  
+  </script>  </body>  
+</html>
