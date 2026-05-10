@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE HOT SAUCE AND GIFTS COLLECTIVE // RED FLAG</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #050505;
+            --neon-green: #39FF14; /* DISSIDENT PRIMARY */
+            --rebel-red: #FF0000;   /* ALERT SECONDARY */
+            --brand-orange: #FF8C00; /* HEAT TERTIARY */
+            --grit-gray: #1a1a1a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: crosshair; }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--neon-green);
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+            line-height: 1.2;
+        }
+
+        /* --- THE GUILLOTINE VANGUARD --- */
+        .vanguard-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #guillotine-loop {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(180%) brightness(40%) grayscale(50%) sepia(20%);
+            opacity: 0.6;
+        }
+
+        /* --- SCANLINE & GLITCH OVERLAYS --- */
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- CONTENT ARCHITECTURE --- */
+        .manifesto-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: rgba(5, 5, 5, 0.85);
+            border-left: 1px solid var(--brand-orange);
+            border-right: 1px solid var(--brand-orange);
+            min-height: 100vh;
+            backdrop-filter: blur(5px);
+        }
+
+        header {
+            border-bottom: 3px double var(--rebel-red);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .brand-identifier {
+            font-family: 'VT323', monospace;
+            color: var(--brand-orange);
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            color: var(--rebel-red);
+            text-shadow: 3px 3px 0px var(--bg-black), 6px 6px 0px rgba(255, 0, 0, 0.2);
+            margin: 10px 0;
+        }
+
+        /* --- TACTICAL NAV --- */
+        .command-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .cmd-btn {
+            border: 1px solid var(--neon-green);
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--neon-green);
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .cmd-btn:hover {
+            background: var(--neon-green);
+            color: var(--bg-black);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        /* --- PRODUCT VECTORS --- */
+        .vector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .vector-card {
+            border: 1px solid var(--grit-gray);
+            background: #0a0a0a;
+            padding: 20px;
+            position: relative;
+        }
+
+        .vector-card:hover {
+            border-color: var(--brand-orange);
+        }
+
+        .vector-card h3 { color: var(--brand-orange); margin-bottom: 10px; }
+        .vector-tag { position: absolute; top: 0; right: 0; background: var(--rebel-red); color: #fff; font-size: 0.7rem; padding: 2px 8px; }
+
+        footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--brand-orange);
+            padding: 20px;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #444;
+        }
+
+        .blue-monroe-signal { color: #00e5ff; text-shadow: 0 0 10px #00e5ff; }
+    </style>
+</head>
+<body>
+
+<div class="vanguard-frame">
+    <video autoplay muted loop playsinline id="guillotine-loop">
+        <source src="https://your-absolute-domain.com/assets/video/GUILLOTINE_LOAD_V3.mp4" type="video/mp4">
+    </video>
+</div>
+<div class="crt-overlay"></div>
+
+<div class="manifesto-container">
+    <header>
+        <div class="brand-identifier">// HOT SAUCE AND GIFTS COLLECTIVE 🌶️🎁🧡 //</div>
+        <h1>SPICY REBELLION</h1>
+        <p class="blue-monroe-signal">LOGGED IN: BLUE MONROE 🟦🔥 // STATUS: ACTIVE</p>
+    </header>
+
+    <nav class="command-strip">
+        <a href="https://whatchuthink.redbubble.com" class="cmd-btn">[ ACQUIRE_GEAR ]</a>
+        <a href="https://gofund.me/8711248e1" class="cmd-btn" style="border-color: var(--rebel-red); color: var(--rebel-red);">[ FUND_REVOLUTION ]</a>
+        <a href="/lore.html" class="cmd-btn">[ DECRYPT_LORE ]</a>
+        <a href="/propaganda.html" class="cmd-btn">[ SNEWS_WIRE ]</a>
+    </nav>
+
+    <section class="vector-grid">
+        <!-- PRODUCT VECTOR 01 -->
+        <div class="vector-card">
+            <span class="vector-tag">HIGH_VOLTAGE</span>
+            <h3>BOTTLED HEAT</h3>
+            <p>Physical propaganda for the palate. Scoville-rated dissident energy.</p>
+        </div>
+        <!-- PRODUCT VECTOR 02 -->
+        <div class="vector-card">
+            <h3>WEARABLE ART</h3>
+            <p>The **Hot Sauce And Gifts Collective 🌶️🎁🧡** official uniform. Anti-mundane aesthetic.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>SYSTEM_ORIGIN: WASHINGTON D.C. // EST_2026</p>
+        <p>NO SANITIZATION DETECTED. ALL SYSTEMS RED FLAG.</p>
+    </footer>
+</div>
+
+</body>
+</html>
